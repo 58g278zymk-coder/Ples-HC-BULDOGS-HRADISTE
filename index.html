@@ -1,109 +1,278 @@
 <!DOCTYPE html>
 <html lang="cs">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hokejový ples HC BULDOGS HRADIŠTĚ</title>
+
+    <title>3. Hokejový ples HC BULDOGS HRADIŠTĚ</title>
+
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
+
+<!-- HERO BANNER -->
 <header class="hero">
-    <div class="overlay">
 
-        <h1>HOKEJOVÝ PLES</h1>
+    <div class="hero-overlay">
 
-        <h2>HC BULDOGS HRADIŠTĚ</h2>
+        <div class="hero-content">
 
-        <p>26. února 2027</p>
+            <h1>3. HOKEJOVÝ PLES</h1>
 
-        <p>Kulturní dům Těrlicko</p>
+            <h2>HC BULDOGS HRADIŠTĚ</h2>
 
-        #rezervace
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<!-- RYCHLÉ INFORMACE -->
+<section class="event-bar">
+
+    <div class="event-item">
+        <span class="icon">📅</span>
+
+        <div>
+            <strong>26. 2. 2027</strong>
+            <p>od 19:00</p>
+        </div>
+    </div>
+
+
+    <div class="event-item">
+        <span class="icon">📍</span>
+
+        <div>
+            <strong>Kulturní dům Těrlicko</strong>
+            <p>Májová 423/22, Těrlicko</p>
+        </div>
+    </div>
+
+
+    <div class="event-item">
+
+        <a href="#rezervace" class="btn">
             Rezervovat vstupenky
         </a>
 
     </div>
-</header>
 
-<section>
-    <h2>O plese</h2>
-
-    <p>
-        HC BULDOGS HRADIŠTĚ Vás srdečně zve na
-        3. Hokejový ples.
-        Čeká Vás skvělá atmosféra,
-        hudba, tanec, tombola a nezapomenutelný večer.
-    </p>
 </section>
 
-<section class="info">
 
-    <h2>Informace o akci</h2>
 
-    <div class="card">
+<!-- O PLESE -->
+<section class="section">
 
-        <p><strong>Datum:</strong> 26. 2. 2027</p>
+    <h2>O PLESE</h2>
 
-        <p><strong>Místo:</strong> Kulturní dům Těrlicko</p>
+    <p class="intro">
 
-        <p><strong>Adresa:</strong> Májová 423/22, Těrlicko</p>
+        HC BULDOGS HRADIŠTĚ Vás srdečně zve na
+        <strong>3. Hokejový ples.</strong>
 
-        <p><strong>Cena vstupenky:</strong> 780 Kč</p>
+        Přijďte si užít večer plný hudby, tance,
+        zábavy a skvělé atmosféry.
 
-        <p><strong>Kapacita:</strong> 16 stolů / 128 míst</p>
+    </p>
+
+</section>
+
+
+
+<!-- INFORMACE -->
+<section class="section dark">
+
+    <h2>INFORMACE O AKCI</h2>
+
+    <div class="info-grid">
+
+        <div class="info-card">
+            <span>📅</span>
+            <h3>Datum</h3>
+            <p>26. února 2027</p>
+        </div>
+
+
+        <div class="info-card">
+            <span>🕖</span>
+            <h3>Začátek</h3>
+            <p>19:00</p>
+        </div>
+
+
+        <div class="info-card">
+            <span>📍</span>
+            <h3>Místo</h3>
+            <p>Kulturní dům Těrlicko</p>
+        </div>
+
+
+        <div class="info-card">
+            <span>🎟️</span>
+            <h3>Vstupné</h3>
+            <p>780 Kč</p>
+        </div>
 
     </div>
 
 </section>
 
-<section>
 
-    <h2>Program večera</h2>
 
-    <ul>
-        <li>19:00 Zahájení plesu</li>
-        <li>20:00 Hudba a tanec</li>
-        <li>24:00 Tombola</li>
-        <li>02:00 Ukončení akce, ale kdo ví....</li>
-    </ul>
+<!-- PROGRAM -->
+<section class="section">
+
+    <h2>PROGRAM VEČERA</h2>
+
+    <div class="program">
+
+        <div class="program-row">
+            <strong>19:00</strong>
+            <span>Zahájení plesu</span>
+        </div>
+
+        <div class="program-row">
+            <strong>20:00</strong>
+            <span>Hudba a tanec</span>
+        </div>
+
+        <div class="program-row">
+            <strong>24:00</strong>
+            <span>Tombola</span>
+        </div>
+
+        <div class="program-row">
+            <strong>02:00</strong>
+            <span>Oficiální ukončení... ale kdo ví 😄</span>
+        </div>
+
+    </div>
 
 </section>
 
-<section>
 
-    <h2>Fotogalerie</h2>
+
+<!-- FOTOGALERIE -->
+<section class="section dark">
+
+    <h2>FOTOGALERIE</h2>
+
+    <p class="gallery-text">
+        Atmosféra z předchozích ročníků
+    </p>
+
 
     <div class="gallery">
 
-        images/foto1.jpg
-        images/foto2.jpg
-        images/foto3.jpg
-        images/foto4.jpg
+        <img src="0007.JPEG"
+             alt="Hokejový ples"
+             onclick="openPhoto(this.src)">
+
+        <img src="0019.JPEG"
+             alt="Hokejový ples"
+             onclick="openPhoto(this.src)">
+
+        <img src="0026.JPEG"
+             alt="Hokejový ples"
+             onclick="openPhoto(this.src)">
+
+        <img src="0035.JPEG"
+             alt="Hokejový ples"
+             onclick="openPhoto(this.src)">
+
+        <img src="0054.JPEG"
+             alt="Hokejový ples"
+             onclick="openPhoto(this.src)">
+
+        <img src="0103.JPEG"
+             alt="Hokejový ples"
+             onclick="openPhoto(this.src)">
 
     </div>
 
 </section>
 
-<section id="rezervace">
 
-    <h2>Rezervace vstupenek</h2>
 
-    <button class="btn">
+<!-- REZERVACE -->
+<section id="rezervace" class="reservation">
+
+    <h2>REZERVACE VSTUPENEK</h2>
+
+    <p>
+        Cena vstupenky
+    </p>
+
+    <div class="price">
+        780 Kč
+    </div>
+
+    <p>
+        Kapacita sálu: 16 stolů / 128 míst
+    </p>
+
+
+    <button class="btn big-btn">
+
         Rezervace bude spuštěna brzy
+
     </button>
 
 </section>
 
+
+
+<!-- POŘADATEL -->
 <footer>
 
-    <h3>HC BULDOGS HRADIŠTĚ</h3>
+    <div class="organizer">
 
-    <p>Pořadatel Hokejového plesu 2027</p>
+        <img
+            src="logo.PNG"
+            alt="HC BULDOGS HRADIŠTĚ"
+            class="organizer-logo">
+
+        <div>
+
+            <p class="small-title">
+                POŘADATEL
+            </p>
+
+            <h2>
+                HC BULDOGS HRADIŠTĚ
+            </h2>
+
+            <p>
+                Pořadatel 3. Hokejového plesu 2027
+            </p>
+
+        </div>
+
+    </div>
 
 </footer>
 
-script.jsscript>
+
+
+<!-- OTEVŘENÁ FOTKA -->
+<div id="lightbox" class="lightbox" onclick="closePhoto()">
+
+    <span class="close">&times;</span>
+
+    <img id="lightbox-img">
+
+</div>
+
+
+<script src="script.js"></script>
 
 </body>
+
 </html>
