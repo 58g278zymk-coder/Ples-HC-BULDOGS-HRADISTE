@@ -3,13 +3,104 @@
 
 <head>
 
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Hokejový ples HC BULDOGS HRADIŠTĚ</title>
+    <title>3. Hokejový ples | HC BULDOGS HRADIŠTĚ</title>
 
-<link rel="stylesheet" href="style.css">
+    <meta
+        name="description"
+        content="3. Hokejový ples HC BULDOGS HRADIŠTĚ – 26. února 2027 od 19:00, Kulturní dům Těrlicko."
+    >
+
+    <!-- NÁHLED ODKAZU PRO WHATSAPP / FACEBOOK -->
+    <meta property="og:type" content="website">
+
+    <meta
+        property="og:title"
+        content="3. Hokejový ples | HC BULDOGS HRADIŠTĚ"
+    >
+
+    <meta
+        property="og:description"
+        content="26. února 2027 od 19:00 • Kulturní dům Těrlicko • vstupné 780 Kč"
+    >
+
+    <meta
+        property="og:url"
+        content="https://ples-hc-buldogs-hradiste.vercel.app/"
+    >
+
+    <meta
+        property="og:image"
+        content="https://ples-hc-buldogs-hradiste.vercel.app/hero.png"
+    >
+
+    <meta property="og:locale" content="cs_CZ">
+
+    <link rel="stylesheet" href="style.css">
+
+
+    <!-- ==================================================
+         ÚPRAVA GALERIE
+         TOTO PŘEPÍŠE POUZE VELIKOST FOTEK
+    ================================================== -->
+
+    <style>
+
+        .gallery {
+            display: grid !important;
+            grid-template-columns: repeat(4, 1fr) !important;
+            gap: 14px !important;
+            max-width: 1100px;
+            margin: 30px auto 0;
+        }
+
+        .gallery-item {
+            width: 100% !important;
+            overflow: hidden;
+            border-radius: 10px;
+            aspect-ratio: 4 / 3;
+        }
+
+        .gallery-item img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            display: block;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item img:hover {
+            transform: scale(1.06);
+        }
+
+
+        /* TABLET */
+
+        @media (max-width: 900px) {
+
+            .gallery {
+                grid-template-columns: repeat(3, 1fr) !important;
+            }
+
+        }
+
+
+        /* MOBIL */
+
+        @media (max-width: 600px) {
+
+            .gallery {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 8px !important;
+            }
+
+        }
+
+    </style>
 
 </head>
 
@@ -33,6 +124,7 @@
 </header>
 
 
+
 <!-- ==================================================
      HLAVNÍ INFORMACE
 ================================================== -->
@@ -44,6 +136,7 @@
         <div class="event-box">
 
             <div>
+
                 <span class="event-label">
                     DATUM
                 </span>
@@ -55,14 +148,17 @@
                 <small>
                     od 19:00
                 </small>
+
             </div>
 
         </div>
 
 
+
         <div class="event-box">
 
             <div>
+
                 <span class="event-label">
                     MÍSTO
                 </span>
@@ -74,9 +170,11 @@
                 <small>
                     Májová 423/22, Těrlicko
                 </small>
+
             </div>
 
         </div>
+
 
 
         <div class="event-button">
@@ -268,7 +366,7 @@
                 </div>
 
                 <div class="program-description">
-                   Vstup do sálu
+                    Vstup do sálu
                 </div>
 
             </div>
@@ -358,6 +456,7 @@
                     src="0007.JPEG"
                     alt="Hokejový ples HC Buldogs"
                     onclick="openLightbox(this.src)"
+                    loading="lazy"
                 >
 
             </div>
@@ -369,6 +468,7 @@
                     src="0019.JPEG"
                     alt="Hokejový ples HC Buldogs"
                     onclick="openLightbox(this.src)"
+                    loading="lazy"
                 >
 
             </div>
@@ -380,6 +480,7 @@
                     src="0026.JPEG"
                     alt="Hokejový ples HC Buldogs"
                     onclick="openLightbox(this.src)"
+                    loading="lazy"
                 >
 
             </div>
@@ -391,6 +492,7 @@
                     src="0035.JPEG"
                     alt="Hokejový ples HC Buldogs"
                     onclick="openLightbox(this.src)"
+                    loading="lazy"
                 >
 
             </div>
@@ -402,6 +504,7 @@
                     src="0054.JPEG"
                     alt="Hokejový ples HC Buldogs"
                     onclick="openLightbox(this.src)"
+                    loading="lazy"
                 >
 
             </div>
@@ -413,9 +516,27 @@
                     src="0103.JPEG"
                     alt="Hokejový ples HC Buldogs"
                     onclick="openLightbox(this.src)"
+                    loading="lazy"
                 >
 
             </div>
+
+
+            <!-- ==================================================
+                 DALŠÍ FOTKY PŘIDÁVEJ SEM
+
+                 Příklad:
+
+                 <div class="gallery-item">
+                     <img
+                         src="NAZEV-FOTKY.JPEG"
+                         alt="Hokejový ples HC Buldogs"
+                         onclick="openLightbox(this.src)"
+                         loading="lazy"
+                     >
+                 </div>
+
+            ================================================== -->
 
 
         </div>
@@ -566,7 +687,6 @@
 
 <!-- ==================================================
      SCRIPT PRO GALERII
-     není potřeba samostatný script.js
 ================================================== -->
 
 <script>
