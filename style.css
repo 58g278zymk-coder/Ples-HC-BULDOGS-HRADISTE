@@ -1,108 +1,2121 @@
-html,
-body {
+
+
+
+
+
+
+
+
+
+
+
+když pošlu odkaz je tam tohle celé 
+
+Ano. 👍 A tentokrát nebudeme sahat na celý index.html, ať se ti stránka znovu nerozhodí.
+
+Udělala bych galerii jako mřížku menších fotek – například na počítači 4 fotky vedle sebe, na mobilu 2. Po kliknutí může zůstat fotografie zvětšená.
+1. V index.html najdi galerii
+
+Pokud tam máš něco podobného:
+
+<div class="gallery">
+    <a href="images/foto1.jpg" target="_blank">
+        <img src="images/foto1.jpg" alt="Hokejový ples">
+    </a>
+
+    <a href="images/foto2.jpg" target="_blank">
+        <img src="images/foto2.jpg" alt="Hokejový ples">
+    </a>
+
+    <a href="images/foto3.jpg" target="_blank">
+        <img src="images/foto3.jpg" alt="Hokejový ples">
+    </a>
+</div>
+
+Můžeš přidat další fotografie úplně stejným způsobem:
+
+<div class="gallery">
+
+    <a href="images/foto1.jpg" target="_blank">
+        <img src="images/foto1.jpg" alt="Hokejový ples">
+    </a>
+
+    <a href="images/foto2.jpg" target="_blank">
+        <img src="images/foto2.jpg" alt="Hokejový ples">
+    </a>
+
+    <a href="images/foto3.jpg" target="_blank">
+        <img src="images/foto3.jpg" alt="Hokejový ples">
+    </a>
+
+    <a href="images/foto4.jpg" target="_blank">
+        <img src="images/foto4.jpg" alt="Hokejový ples">
+    </a>
+
+    <a href="images/foto5.jpg" target="_blank">
+        <img src="images/foto5.jpg" alt="Hokejový ples">
+    </a>
+
+    <a href="images/foto6.jpg" target="_blank">
+        <img src="images/foto6.jpg" alt="Hokejový ples">
+    </a>
+
+    <a href="images/foto7.jpg" target="_blank">
+        <img src="images/foto7.jpg" alt="Hokejový ples">
+    </a>
+
+    <a href="images/foto8.jpg" target="_blank">
+        <img src="images/foto8.jpg" alt="Hokejový ples">
+    </a>
+
+</div>
+
+2. A do style.css upravíme pouze galerii
+
+Najdi současné .gallery a .gallery img a nahraď je tímto:
+
+/* ===== GALERIE ===== */
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    max-width: 1100px;
+    margin: 30px auto;
+}
+
+.gallery a {
+    display: block;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.gallery img {
     width: 100%;
-    max-width: 100%;
-    overflow-x: hidden;
+    height: 170px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+    cursor: pointer;
 }
 
-img {
-    max-width: 100%;
-    height: auto;
+.gallery img:hover {
+    transform: scale(1.06);
 }
 
-section,
-header,
-footer,
-.event-bar,
-.event-info,
-.section-inner,
-.gallery,
-.info-grid,
-.reservation-content {
-    max-width: 100%;
-}
-
-@media (max-width: 600px) {
-
-    body {
-        width: 100%;
-        overflow-x: hidden;
-    }
-
-    .hero {
-        width: 100%;
-        overflow: hidden;
-    }
-
-    .hero-image {
-        width: 100%;
-        max-width: 100%;
-        height: auto;
-        display: block;
-    }
-
-    .event-bar {
-        width: 100%;
-        padding: 22px 16px;
-    }
-
-    .event-info {
-        width: 100%;
-        display: block;
-    }
-
-    .event-box {
-        width: 100%;
-        margin-bottom: 18px;
-    }
-
-    .event-button {
-        width: 100%;
-    }
-
-    .btn {
-        width: 100%;
-        max-width: 100%;
-        text-align: center;
-    }
-
-    .section {
-        width: 100%;
-        padding: 60px 16px;
-    }
-
-    .section-inner {
-        width: 100%;
-        max-width: 100%;
-    }
-
-    .info-grid {
-        grid-template-columns: 1fr;
-        width: 100%;
-    }
-
-    .program {
-        width: 100%;
-        max-width: 100%;
-    }
-
-    .program-row {
-        grid-template-columns: 75px 1fr;
-        width: 100%;
-    }
-
+/* TABLET */
+@media (max-width: 900px) {
     .gallery {
-        width: 100%;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* MOBIL */
+@media (max-width: 600px) {
+    .gallery {
+        grid-template-columns: repeat(2, 1fr);
         gap: 8px;
     }
 
-    .gallery-item {
-        width: 100%;
-        min-width: 0;
+    .gallery img {
+        height: 130px;
+    }
+}
+
+Výsledek bude na počítači přibližně:
+
+┌──────┐ ┌──────┐ ┌──────┐ ┌──────┐
+│ FOTO │ │ FOTO │ │ FOTO │ │ FOTO │
+└──────┘ └──────┘ └──────┘ └──────┘
+
+┌──────┐ ┌──────┐ ┌──────┐ ┌──────┐
+│ FOTO │ │ FOTO │ │ FOTO │ │ FOTO │
+└──────┘ └──────┘ └──────┘ └──────┘
+
+A na telefonu se automaticky poskládají 2 vedle sebe.
+
+Ještě bych to udělala o něco lépe: po kliknutí bych fotku neotvírala na nové stránce, ale zvětšila přes celý web do černého průhledného okna a šipkami by šlo procházet další fotky. To by na stránce plesu vypadalo mnohem lépe.
+
+Vlozeny text.txt
+Dokument
+můžem mi do indexu to vložit tak abych skopírovala celé 
+
+Ano. Udělám ti to tak, abys nemusela sahat do style.css. Vzala jsem tvůj současný index.html, kde už máš galerii se 6 fotografiemi a funkční zvětšení po kliknutí.
+
+Do celého indexu jsem přidala jen bezpečné úpravy galerie: 4 menší fotky vedle sebe na PC, 3 na tabletu a 2 na mobilu. Zvětšování fotografií zůstává. Používám také skutečné názvy hero.png a logo.PNG z tvého souboru.
+
+Celý současný index.html smaž a vlož místo něj toto:
+
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>3. Hokejový ples | HC BULDOGS HRADIŠTĚ</title>
+
+    <meta
+        name="description"
+        content="3. Hokejový ples HC BULDOGS HRADIŠTĚ – 26. února 2027 od 19:00, Kulturní dům Těrlicko."
+    >
+
+    <!-- NÁHLED ODKAZU PRO WHATSAPP / FACEBOOK -->
+    <meta property="og:type" content="website">
+
+    <meta
+        property="og:title"
+        content="3. Hokejový ples | HC BULDOGS HRADIŠTĚ"
+    >
+
+    <meta
+        property="og:description"
+        content="26. února 2027 od 19:00 • Kulturní dům Těrlicko • vstupné 780 Kč"
+    >
+
+    <meta
+        property="og:url"
+        content="https://ples-hc-buldogs-hradiste.vercel.app/"
+    >
+
+    <meta
+        property="og:image"
+        content="https://ples-hc-buldogs-hradiste.vercel.app/hero.png"
+    >
+
+    <meta property="og:locale" content="cs_CZ">
+
+    <link rel="stylesheet" href="style.css">
+
+
+    <!-- ==================================================
+         ÚPRAVA GALERIE
+         TOTO PŘEPÍŠE POUZE VELIKOST FOTEK
+    ================================================== -->
+
+    <style>
+
+        .gallery {
+            display: grid !important;
+            grid-template-columns: repeat(4, 1fr) !important;
+            gap: 14px !important;
+            max-width: 1100px;
+            margin: 30px auto 0;
+        }
+
+        .gallery-item {
+            width: 100% !important;
+            overflow: hidden;
+            border-radius: 10px;
+            aspect-ratio: 4 / 3;
+        }
+
+        .gallery-item img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            display: block;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item img:hover {
+            transform: scale(1.06);
+        }
+
+
+        /* TABLET */
+
+        @media (max-width: 900px) {
+
+            .gallery {
+                grid-template-columns: repeat(3, 1fr) !important;
+            }
+
+        }
+
+
+        /* MOBIL */
+
+        @media (max-width: 600px) {
+
+            .gallery {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 8px !important;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ==================================================
+     HERO
+     obrázek je celý viditelný a není oříznutý
+================================================== -->
+
+<header class="hero">
+
+    <img
+        src="hero.png"
+        alt="3. Hokejový ples HC BULDOGS HRADIŠTĚ"
+        class="hero-image"
+    >
+
+</header>
+
+
+
+<!-- ==================================================
+     HLAVNÍ INFORMACE
+================================================== -->
+
+<section class="event-bar">
+
+    <div class="event-info">
+
+        <div class="event-box">
+
+            <div>
+
+                <span class="event-label">
+                    DATUM
+                </span>
+
+                <strong>
+                    26. února 2027
+                </strong>
+
+                <small>
+                    od 19:00
+                </small>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="event-box">
+
+            <div>
+
+                <span class="event-label">
+                    MÍSTO
+                </span>
+
+                <strong>
+                    Kulturní dům Těrlicko
+                </strong>
+
+                <small>
+                    Májová 423/22, Těrlicko
+                </small>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="event-button">
+
+            <a
+                href="#rezervace"
+                class="btn"
+            >
+                REZERVOVAT VSTUPENKY
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ==================================================
+     O PLESE
+================================================== -->
+
+<section class="section about">
+
+    <div class="section-inner">
+
+        <p class="section-small-title">
+            Srdečně Vás zveme na PLES
+        </p>
+
+        <h1 class="section-title">
+            Bez Vás by to nešlo!
+        </h1>
+
+        <div class="gold-line"></div>
+
+        <p class="about-text">
+
+            Přijďte si užít večer plný hudby,
+            tance, skvělé atmosféry a zábavy.
+
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- ==================================================
+     INFORMACE O AKCI
+================================================== -->
+
+<section class="section section-dark">
+
+    <div class="section-inner">
+
+        <p class="section-small-title">
+            VŠE NA JEDNOM MÍSTĚ
+        </p>
+
+        <h2 class="section-title">
+            INFORMACE O AKCI
+        </h2>
+
+        <div class="gold-line"></div>
+
+
+        <div class="info-grid">
+
+
+            <div class="info-card">
+
+                <div class="info-icon">
+                    📅
+                </div>
+
+                <h3>
+                    Datum
+                </h3>
+
+                <p>
+                    26. února 2027
+                </p>
+
+            </div>
+
+
+
+            <div class="info-card">
+
+                <div class="info-icon">
+                    🕖
+                </div>
+
+                <h3>
+                    Začátek
+                </h3>
+
+                <p>
+                    19:00
+                </p>
+
+            </div>
+
+
+
+            <div class="info-card">
+
+                <div class="info-icon">
+                    📍
+                </div>
+
+                <h3>
+                    Místo
+                </h3>
+
+                <p>
+                    Kulturní dům Těrlicko
+                </p>
+
+            </div>
+
+
+
+            <div class="info-card">
+
+                <div class="info-icon">
+                    🎟️
+                </div>
+
+                <h3>
+                    Vstupné
+                </h3>
+
+                <p>
+                    780 Kč
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="address">
+
+            <strong>
+                Adresa:
+            </strong>
+
+            Májová 423/22, Těrlicko
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ==================================================
+     PROGRAM
+================================================== -->
+
+<section class="section">
+
+    <div class="section-inner">
+
+        <p class="section-small-title">
+            CO VÁS ČEKÁ
+        </p>
+
+        <h2 class="section-title">
+            PROGRAM VEČERA
+        </h2>
+
+        <div class="gold-line"></div>
+
+
+        <div class="program">
+
+
+            <div class="program-row">
+
+                <div class="program-time">
+                    19:00
+                </div>
+
+                <div class="program-description">
+                    Vstup do sálu
+                </div>
+
+            </div>
+
+
+
+            <div class="program-row">
+
+                <div class="program-time">
+                    20:00
+                </div>
+
+                <div class="program-description">
+                    Zahájení, hudba a tanec
+                </div>
+
+            </div>
+
+
+
+            <div class="program-row">
+
+                <div class="program-time">
+                    24:00
+                </div>
+
+                <div class="program-description">
+                    Tombola
+                </div>
+
+            </div>
+
+
+
+            <div class="program-row">
+
+                <div class="program-time">
+                    02:00
+                </div>
+
+                <div class="program-description">
+                    Oficiální ukončení akce...
+                    ale kdo ví 🙂
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ==================================================
+     GALERIE
+================================================== -->
+
+<section class="section section-dark">
+
+    <div class="section-inner">
+
+        <p class="section-small-title">
+            ZAVZPOMÍNEJTE S NÁMI
+        </p>
+
+        <h2 class="section-title">
+            FOTOGALERIE
+        </h2>
+
+        <div class="gold-line"></div>
+
+        <p class="gallery-description">
+            Atmosféra z předchozích ročníků
+            Hokejového plesu.
+        </p>
+
+
+        <div class="gallery">
+
+
+            <div class="gallery-item">
+
+                <img
+                    src="0007.JPEG"
+                    alt="Hokejový ples HC Buldogs"
+                    onclick="openLightbox(this.src)"
+                    loading="lazy"
+                >
+
+            </div>
+
+
+            <div class="gallery-item">
+
+                <img
+                    src="0019.JPEG"
+                    alt="Hokejový ples HC Buldogs"
+                    onclick="openLightbox(this.src)"
+                    loading="lazy"
+                >
+
+            </div>
+
+
+            <div class="gallery-item">
+
+                <img
+                    src="0026.JPEG"
+                    alt="Hokejový ples HC Buldogs"
+                    onclick="openLightbox(this.src)"
+                    loading="lazy"
+                >
+
+            </div>
+
+
+            <div class="gallery-item">
+
+                <img
+                    src="0035.JPEG"
+                    alt="Hokejový ples HC Buldogs"
+                    onclick="openLightbox(this.src)"
+                    loading="lazy"
+                >
+
+            </div>
+
+
+            <div class="gallery-item">
+
+                <img
+                    src="0054.JPEG"
+                    alt="Hokejový ples HC Buldogs"
+                    onclick="openLightbox(this.src)"
+                    loading="lazy"
+                >
+
+            </div>
+
+
+            <div class="gallery-item">
+
+                <img
+                    src="0103.JPEG"
+                    alt="Hokejový ples HC Buldogs"
+                    onclick="openLightbox(this.src)"
+                    loading="lazy"
+                >
+
+            </div>
+
+
+            <!-- ==================================================
+                 DALŠÍ FOTKY PŘIDÁVEJ SEM
+
+                 Příklad:
+
+                 <div class="gallery-item">
+                     <img
+                         src="NAZEV-FOTKY.JPEG"
+                         alt="Hokejový ples HC Buldogs"
+                         onclick="openLightbox(this.src)"
+                         loading="lazy"
+                     >
+                 </div>
+
+            ================================================== -->
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ==================================================
+     REZERVACE
+================================================== -->
+
+<section
+    id="rezervace"
+    class="reservation"
+>
+
+    <div class="reservation-content">
+
+        <p class="section-small-title">
+            3. HOKEJOVÝ PLES
+        </p>
+
+        <h2>
+            REZERVACE VSTUPENEK
+        </h2>
+
+        <div class="gold-line"></div>
+
+
+        <p class="reservation-text">
+            Vyberte si své místo na plese
+            HC BULDOGS HRADIŠTĚ.
+        </p>
+
+
+        <div class="price">
+
+            <span>
+                Cena vstupenky
+            </span>
+
+            <strong>
+                780 Kč
+            </strong>
+
+        </div>
+
+
+        <p class="capacity">
+
+            Kapacita sálu:
+            <strong>
+                16 stolů / 128 míst
+            </strong>
+
+        </p>
+
+
+        <button
+            class="btn reservation-btn"
+            type="button"
+        >
+            REZERVACE BUDE SPUŠTĚNA BRZY
+        </button>
+
+    </div>
+
+</section>
+
+
+
+<!-- ==================================================
+     POŘADATEL
+================================================== -->
+
+<footer class="footer">
+
+    <div class="footer-inner">
+
+
+        <div class="organizer-logo-box">
+
+            <img
+                src="logo.PNG"
+                alt="Logo HC BULDOGS HRADIŠTĚ"
+                class="organizer-logo"
+            >
+
+        </div>
+
+
+        <div class="organizer-text">
+
+            <span>
+                POŘADATEL
+            </span>
+
+            <h2>
+                HC BULDOGS HRADIŠTĚ
+            </h2>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        © 2027 HC BULDOGS HRADIŠTĚ
+
+    </div>
+
+</footer>
+
+
+
+<!-- ==================================================
+     ZVĚTŠENÍ FOTOGRAFIE
+================================================== -->
+
+<div
+    id="lightbox"
+    class="lightbox"
+    onclick="closeLightbox()"
+>
+
+    <button
+        class="lightbox-close"
+        onclick="closeLightbox()"
+        aria-label="Zavřít fotografii"
+    >
+        ×
+    </button>
+
+    <img
+        id="lightbox-image"
+        src=""
+        alt="Zvětšená fotografie"
+    >
+
+</div>
+
+
+
+<!-- ==================================================
+     SCRIPT PRO GALERII
+================================================== -->
+
+<script>
+
+    function openLightbox(imageSource) {
+
+        const lightbox =
+            document.getElementById("lightbox");
+
+        const image =
+            document.getElementById("lightbox-image");
+
+        image.src = imageSource;
+
+        lightbox.classList.add("active");
+
+        document.body.classList.add("no-scroll");
     }
 
-    .footer {
-        width: 100%;
+
+    function closeLightbox() {
+
+        const lightbox =
+            document.getElementById("lightbox");
+
+        lightbox.classList.remove("active");
+
+        document.body.classList.remove("no-scroll");
     }
+
+
+    document.addEventListener(
+        "keydown",
+        function(event) {
+
+            if (event.key === "Escape") {
+
+                closeLightbox();
+
+            }
+
+        }
+    );
+
+
+    document
+        .getElementById("lightbox-image")
+        .addEventListener(
+            "click",
+            function(event) {
+
+                event.stopPropagation();
+
+            }
+        );
+
+</script>
+
+
+</body>
+
+</html>
+
+Co se teď změní
+
+Na počítači budou fotografie takto:
+
+▣ ▣ ▣ ▣
+▣ ▣
+
+a až přidáš další:
+
+▣ ▣ ▣ ▣
+▣ ▣ ▣ ▣
+▣ ▣ ▣ ▣
+
+Po kliknutí se budou dál zvětšovat přes obrazovku, stejně jako teď. Navíc jsem dala loading="lazy", takže když přidáš třeba 20–30 fotek, web nebude muset všechny načítat hned při otevření.
+
+Pošli mi teď klidně screenshot názvů dalších fotek, které máš na GitHubu (např. 0115.JPEG, 0128.JPEG atd.) a já ti rovnou připravím galerii třeba s 12 nebo 16 skutečnými fotografiemi, abys už nemusela jednotlivé bloky dopisovat.
+
+Vlozeny text(1).txt
+Dokument
+to stejné pro style.css
+
+Ano. Teď už mám i tvůj skutečný style.css, takže ti ho můžu upravit tak, aby odpovídal tomu index.html, který jsem ti poslala. V původním CSS máš galerii nastavenou na 3 fotografie vedle sebe a na mobilu pouze jednu.
+
+Uděláme 4 fotografie vedle sebe na PC, 3 na tabletu a 2 na mobilu. Lightbox a zbytek designu zůstane zachovaný. Současný lightbox už máš správně připravený.
+
+Protože je tvůj CSS soubor dlouhý přes 1000 řádků, nejbezpečnější je nemazat celý style.css. Vlož úplně NA KONEC současného style.css tento blok:
+
+/* =====================================================
+   NOVÁ FOTOGALERIE
+   4 FOTO PC / 3 TABLET / 2 MOBIL
+===================================================== */
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+
+    width: 100%;
+    max-width: 1100px;
+
+    margin: 0 auto;
+}
+
+
+.gallery-item {
+    width: 100%;
+
+    height: auto;
+
+    aspect-ratio: 4 / 3;
+
+    overflow: hidden;
+
+    border-radius: 9px;
+
+    background: #191919;
+
+    border: 1px solid #292929;
+}
+
+
+.gallery-item img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.35s ease,
+        filter 0.35s ease;
+}
+
+
+.gallery-item:hover img {
+    transform: scale(1.06);
+
+    filter: brightness(1.13);
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 900px) {
+
+    .gallery {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+
+        gap: 12px;
+    }
+
+}
+
+
+/* =====================================================
+   MOBIL
+===================================================== */
+
+@media (max-width: 600px) {
+
+    .gallery {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+
+        gap: 8px;
+    }
+
+
+    .gallery-item {
+        aspect-ratio: 1 / 1;
+    }
+
+}
+
+Pozor na jednu věc
+
+V index.html, který jsem ti před chvílí připravila, jsem dala stejné nastavení galerie také do:
+
+<style>
+...
+</style>
+
+To už tam nepotřebujeme, když to teď máme správně ve style.css.
+
+Takže pokud už jsi můj nový index.html vložila, můžu ti teď udělat finální čistou dvojici souborů:
+
+index.html + style.css
+
+bez duplicit a přesně podle tvého současného webu. Ty pak jen celý obsah obou souborů na GitHubu přepíšeš a nebudeš muset hledat, co kam vložit.
+
+Tohle bude pro tebe bezpečnější než další postupné dopisování kódu.
+
+
+/* =====================================================
+ZÁKLAD
+===================================================== */
+
+    {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    }
+
+html {
+scroll-behavior: smooth;
+}
+
+body {
+margin: 0;
+padding: 0;
+
+font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+background: #080808;
+
+color: #ffffff;
+
+line-height: 1.6;
+
+overflow-x: hidden;
+
+}
+
+body.no-scroll {
+overflow: hidden;
+}
+
+
+/* =====================================================
+HERO
+CELÝ OBRÁZEK BEZ OŘEZÁNÍ
+===================================================== */
+
+.hero {
+width: 100%;
+
+margin: 0;
+padding: 0;
+
+background: #000000;
+
+line-height: 0;
+
+}
+
+.hero-image {
+display: block;
+
+width: 100%;
+
+height: auto;
+
+margin: 0;
+padding: 0;
+
+}
+
+
+/* =====================================================
+DATUM + MÍSTO + TLAČÍTKO
+===================================================== */
+
+.event-bar {
+width: 100%;
+
+background:
+    linear-gradient(
+        180deg,
+        #171717,
+        #101010
+    );
+
+border-top:
+    1px solid #303030;
+
+border-bottom:
+    1px solid #282828;
+
+padding:
+    28px 30px;
+
+}
+
+.event-info {
+width: 100%;
+
+max-width: 1200px;
+
+margin: 0 auto;
+
+display: flex;
+
+align-items: center;
+
+justify-content:
+    space-between;
+
+gap: 35px;
+
+}
+
+.event-box {
+display: flex;
+
+align-items: center;
+
+gap: 16px;
+
+}
+
+.event-icon {
+width: 50px;
+height: 50px;
+
+display: flex;
+
+align-items: center;
+
+justify-content: center;
+
+font-size: 25px;
+
+background: #202020;
+
+border:
+    1px solid #343434;
+
+border-radius: 50%;
+
+}
+
+.event-label {
+display: block;
+
+color: #b89a48;
+
+font-size: 11px;
+
+font-weight: bold;
+
+letter-spacing: 2px;
+
+margin-bottom: 2px;
+
+}
+
+.event-box strong {
+display: block;
+
+color: white;
+
+font-size: 17px;
+
+}
+
+.event-box small {
+display: block;
+
+color: #a9a9a9;
+
+margin-top: 1px;
+
+font-size: 13px;
+
+}
+
+
+/* =====================================================
+TLAČÍTKA
+===================================================== */
+
+.btn {
+display: inline-block;
+
+padding:
+    16px 28px;
+
+background:
+    linear-gradient(
+        135deg,
+        #a77c21,
+        #e2c56b,
+        #b38b31
+    );
+
+border: none;
+
+border-radius: 5px;
+
+color: #090909;
+
+font-size: 14px;
+
+font-weight: 800;
+
+letter-spacing: 0.8px;
+
+text-decoration: none;
+
+cursor: pointer;
+
+transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+
+}
+
+.btn {
+transform:
+translateY(-2px);
+
+box-shadow:
+    0 10px 30px
+    rgba(204, 170, 79, 0.25);
+
+}
+
+
+/* =====================================================
+OBECNÉ SEKCE
+===================================================== */
+
+.section {
+width: 100%;
+
+padding:
+    90px 25px;
+
+background: #0c0c0c;
+
+}
+
+.section-dark {
+background:
+linear-gradient(
+180deg,
+#121212,
+#090909
+);
+}
+
+.section-inner {
+width: 100%;
+
+max-width: 1200px;
+
+margin:
+    0 auto;
+
+text-align: center;
+
+}
+
+.section-small-title {
+color: #aa8d41;
+
+font-size: 12px;
+
+font-weight: 700;
+
+letter-spacing: 4px;
+
+margin-bottom: 10px;
+
+}
+
+.section-title {
+color: white;
+
+font-size:
+    clamp(
+        29px,
+        4vw,
+        45px
+    );
+
+font-weight: 800;
+
+letter-spacing: 1px;
+
+line-height: 1.2;
+
+}
+
+.gold-line {
+width: 70px;
+
+height: 3px;
+
+margin:
+    22px auto 35px;
+
+background:
+    linear-gradient(
+        90deg,
+        #80601c,
+        #e4c96d,
+        #80601c
+    );
+
+}
+
+
+/* =====================================================
+O PLESE
+===================================================== */
+
+.about {
+padding-top: 100px;
+padding-bottom: 100px;
+}
+
+.about-text {
+max-width: 760px;
+
+margin:
+    0 auto;
+
+color: #c8c8c8;
+
+font-size: 19px;
+
+line-height: 1.9;
+
+}
+
+
+/* =====================================================
+INFO KARTY
+===================================================== */
+
+.info-grid {
+margin-top: 45px;
+
+display: grid;
+
+grid-template-columns:
+    repeat(
+        4,
+        minmax(0, 1fr)
+    );
+
+gap: 20px;
+
+}
+
+.info-card {
+position: relative;
+
+padding:
+    38px 20px;
+
+background:
+    linear-gradient(
+        145deg,
+        #1a1a1a,
+        #111111
+    );
+
+border:
+    1px solid #292929;
+
+border-radius: 10px;
+
+overflow: hidden;
+
+transition:
+    transform 0.25s ease,
+    border-color 0.25s ease;
+
+}
+
+.info-card {
+transform:
+translateY(-5px);
+
+border-color:
+    #806927;
+
+}
+
+.info-card::before {
+content: "";
+
+position: absolute;
+
+top: 0;
+left: 0;
+
+width: 100%;
+
+height: 3px;
+
+background:
+    linear-gradient(
+        90deg,
+        transparent,
+        #c5a24b,
+        transparent
+    );
+
+}
+
+.info-icon {
+font-size: 32px;
+
+margin-bottom: 14px;
+
+}
+
+.info-card h3 {
+color: #c5a24b;
+
+font-size: 13px;
+
+text-transform: uppercase;
+
+letter-spacing: 2px;
+
+margin-bottom: 7px;
+
+}
+
+.info-card p {
+color: #f3f3f3;
+
+font-size: 17px;
+
+}
+
+.address {
+margin-top: 30px;
+
+color: #a7a7a7;
+
+font-size: 15px;
+
+}
+
+.address strong {
+color: #d0b359;
+}
+
+
+/* =====================================================
+PROGRAM
+===================================================== */
+
+.program {
+max-width: 760px;
+
+margin:
+    50px auto 0;
+
+}
+
+.program-row {
+display: grid;
+
+grid-template-columns:
+    130px 1fr;
+
+align-items: center;
+
+border-bottom:
+    1px solid #242424;
+
+padding:
+    23px 15px;
+
+text-align: left;
+
+transition:
+    background 0.2s ease;
+
+}
+
+.program-row {
+border-top:
+1px solid #242424;
+}
+
+.program-row {
+background:
+rgba(
+255,
+255,
+255,
+0.025
+);
+}
+
+.program-time {
+color: #d0b257;
+
+font-size: 22px;
+
+font-weight: 800;
+
+}
+
+.program-description {
+color: #dedede;
+
+font-size: 17px;
+
+}
+
+
+/* =====================================================
+GALERIE
+===================================================== */
+
+.gallery-description {
+color: #9e9e9e;
+
+margin-bottom: 38px;
+
+font-size: 16px;
+
+}
+
+.gallery {
+display: grid;
+
+grid-template-columns:
+    repeat(
+        3,
+        1fr
+    );
+
+gap: 16px;
+
+}
+
+.gallery-item {
+height: 270px;
+
+overflow: hidden;
+
+border-radius: 8px;
+
+background: #191919;
+
+border:
+    1px solid #292929;
+
+}
+
+.gallery-item img {
+display: block;
+
+width: 100%;
+height: 100%;
+
+object-fit: cover;
+
+cursor: pointer;
+
+transition:
+    transform 0.4s ease,
+    filter 0.4s ease;
+
+}
+
+.gallery-item img {
+transform:
+scale(1.06);
+
+filter:
+    brightness(1.13);
+
+}
+
+
+/* =====================================================
+LIGHTBOX – ZVĚTŠENÁ FOTOGRAFIE
+===================================================== */
+
+.lightbox {
+position: fixed;
+
+inset: 0;
+
+z-index: 9999;
+
+display: flex;
+
+align-items: center;
+
+justify-content: center;
+
+padding: 30px;
+
+background:
+    rgba(
+        0,
+        0,
+        0,
+        0.94
+    );
+
+opacity: 0;
+
+visibility: hidden;
+
+transition:
+    opacity 0.25s ease,
+    visibility 0.25s ease;
+
+}
+
+.lightbox.active {
+opacity: 1;
+
+visibility: visible;
+
+}
+
+.lightbox img {
+display: block;
+
+max-width: 95%;
+
+max-height: 90vh;
+
+width: auto;
+height: auto;
+
+object-fit: contain;
+
+box-shadow:
+    0 10px 60px
+    rgba(
+        0,
+        0,
+        0,
+        0.6
+    );
+
+}
+
+.lightbox-close {
+position: absolute;
+
+top: 15px;
+right: 25px;
+
+z-index: 10000;
+
+border: none;
+
+background: none;
+
+color: white;
+
+font-size: 52px;
+
+font-weight: 200;
+
+cursor: pointer;
+
+line-height: 1;
+
+}
+
+
+/* =====================================================
+REZERVACE
+===================================================== */
+
+.reservation {
+width: 100%;
+
+padding:
+    100px 25px;
+
+text-align: center;
+
+background:
+    radial-gradient(
+        circle at center,
+        #28220e 0%,
+        #13110b 30%,
+        #080808 70%
+    );
+
+border-top:
+    1px solid #29240f;
+
+border-bottom:
+    1px solid #29240f;
+
+}
+
+.reservation-content {
+max-width: 800px;
+
+margin:
+    0 auto;
+
+}
+
+.reservation h2 {
+color: white;
+
+font-size:
+    clamp(
+        30px,
+        4vw,
+        45px
+    );
+
+line-height: 1.2;
+
+}
+
+.reservation-text {
+color: #c1c1c1;
+
+font-size: 17px;
+
+margin-bottom: 35px;
+
+}
+
+.price {
+margin:
+30px 0 20px;
+}
+
+.price span {
+display: block;
+
+color: #999;
+
+font-size: 13px;
+
+letter-spacing: 2px;
+
+text-transform: uppercase;
+
+}
+
+.price strong {
+display: block;
+
+color: #d5b757;
+
+font-size:
+    clamp(
+        46px,
+        6vw,
+        66px
+    );
+
+line-height: 1.2;
+
+margin-top: 5px;
+
+}
+
+.capacity {
+color: #a9a9a9;
+
+margin-bottom: 25px;
+
+}
+
+.capacity strong {
+color: white;
+}
+
+.reservation-btn {
+margin-top: 10px;
+}
+
+
+/* =====================================================
+FOOTER / POŘADATEL
+===================================================== */
+
+.footer {
+width: 100%;
+
+background: #050505;
+
+padding:
+    55px 25px 0;
+
+}
+
+.footer-inner {
+max-width: 900px;
+
+margin:
+    0 auto;
+
+display: flex;
+
+align-items: center;
+
+justify-content: center;
+
+gap: 35px;
+
+padding-bottom: 45px;
+
+}
+
+.organizer-logo-box {
+width: 150px;
+
+flex-shrink: 0;
+
+}
+
+.organizer-logo {
+display: block;
+
+width: 100%;
+
+height: auto;
+
+max-height: 150px;
+
+object-fit: contain;
+
+}
+
+.organizer-text {
+text-align: left;
+}
+
+.organizer-text span {
+display: block;
+
+color: #9c813c;
+
+font-size: 11px;
+
+font-weight: 700;
+
+letter-spacing: 3px;
+
+margin-bottom: 7px;
+
+}
+
+.organizer-text h2 {
+color: white;
+
+font-size:
+    clamp(
+        22px,
+        3vw,
+        30px
+    );
+
+margin-bottom: 5px;
+
+}
+
+.organizer-text p {
+color: #8f8f8f;
+
+font-size: 14px;
+
+}
+
+.footer-bottom {
+width: 100%;
+
+max-width: 1200px;
+
+margin:
+    0 auto;
+
+padding:
+    20px 0;
+
+border-top:
+    1px solid #1e1e1e;
+
+color: #555;
+
+font-size: 12px;
+
+text-align: center;
+
+}
+
+
+/* =====================================================
+TABLET
+===================================================== */
+
+@media
+(max-width: 900px) {
+
+.event-info {
+    flex-wrap: wrap;
+
+    justify-content:
+        center;
+}
+
+
+.event-box {
+    flex:
+        1 1 280px;
+}
+
+
+.event-button {
+    flex:
+        1 1 100%;
+
+    text-align: center;
+
+    margin-top: 5px;
+}
+
+
+.info-grid {
+    grid-template-columns:
+        repeat(
+            2,
+            1fr
+        );
+}
+
+
+.gallery {
+    grid-template-columns:
+        repeat(
+            2,
+            1fr
+        );
+}
+
+}
+
+
+/* =====================================================
+MOBIL
+===================================================== */
+
+@media
+(max-width: 600px) {
+
+.event-bar {
+    padding:
+        25px 20px;
+}
+
+
+.event-info {
+    display: block;
+}
+
+
+.event-box {
+    width: 100%;
+
+    margin-bottom: 22px;
+}
+
+
+.event-button {
+    width: 100%;
+
+    margin-top: 25px;
+}
+
+
+.btn {
+    width: 100%;
+
+    text-align: center;
+}
+
+
+.section {
+    padding:
+        70px 18px;
+}
+
+
+.about {
+    padding:
+        70px 20px;
+}
+
+
+.about-text {
+    font-size: 17px;
+}
+
+
+.info-grid {
+    grid-template-columns:
+        1fr;
+}
+
+
+.program-row {
+    grid-template-columns:
+        90px 1fr;
+
+    padding:
+        19px 5px;
+}
+
+
+.program-time {
+    font-size: 19px;
+}
+
+
+.program-description {
+    font-size: 15px;
+}
+
+
+.gallery {
+    grid-template-columns:
+        1fr;
+
+    gap: 15px;
+}
+
+
+.gallery-item {
+    height: 260px;
+}
+
+
+.reservation {
+    padding:
+        75px 20px;
+}
+
+
+.footer-inner {
+    flex-direction: column;
+
+    text-align: center;
+
+    gap: 20px;
+}
+
+
+.organizer-logo-box {
+    width: 120px;
+}
+
+
+.organizer-text {
+    text-align: center;
+}
+
+
+.lightbox {
+    padding: 15px;
+}
+
+
+.lightbox-close {
+    top: 10px;
+    right: 15px;
+}
+
 }
