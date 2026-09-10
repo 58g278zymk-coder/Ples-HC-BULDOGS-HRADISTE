@@ -5,32 +5,29 @@
 }
 
 body{
-    font-family:Arial, sans-serif;
+    font-family:Arial,sans-serif;
     background:#111;
     color:white;
+    line-height:1.7;
 }
 
 .hero{
     height:100vh;
-    background:url("images/hero.jpg");
-    background-size:cover;
-    background-position:center;
+    background:#000;
 }
 
 .overlay{
-    width:100%;
     height:100%;
-    background:rgba(0,0,0,.6);
-
     display:flex;
     flex-direction:column;
     justify-content:center;
     align-items:center;
+    text-align:center;
 }
 
 h1{
-    color:#d4af37;
     font-size:70px;
+    color:#d4af37;
 }
 
 h2{
@@ -40,54 +37,38 @@ h2{
 
 section{
     padding:80px 20px;
+    max-width:1200px;
+    margin:auto;
     text-align:center;
+}
+
+.card{
+    background:#222;
+    padding:30px;
+    border-radius:15px;
 }
 
 .btn{
     display:inline-block;
     margin-top:20px;
-
     background:#d4af37;
-
     color:black;
-
-    text-decoration:none;
-
     padding:15px 30px;
-
-    border-radius:10px;
-
     border:none;
-
-    cursor:pointer;
-
-    font-size:18px;
-
+    border-radius:10px;
+    text-decoration:none;
     font-weight:bold;
+    cursor:pointer;
 }
 
-.btn:hover{
-    background:white;
-}
-
-.card{
-    background:#222;
-    max-width:600px;
-    margin:auto;
-    padding:30px;
-    border-radius:15px;
-}
-
-.gallery-grid{
+.gallery{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
     gap:20px;
 }
 
-.gallery-grid img{
+.gallery img{
     width:100%;
-    height:250px;
-    object-fit:cover;
     border-radius:10px;
 }
 
@@ -95,12 +76,8 @@ ul{
     list-style:none;
 }
 
-ul li{
-    margin:15px;
-    font-size:20px;
-}
-
 footer{
+    margin-top:60px;
     background:black;
     padding:40px;
     text-align:center;
