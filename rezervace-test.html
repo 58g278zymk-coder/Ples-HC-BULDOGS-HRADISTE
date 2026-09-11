@@ -119,6 +119,7 @@ button,input{font:inherit}
 .table-group{position:absolute;z-index:5}
 .table{
   position:absolute;
+  cursor:pointer;
   background:linear-gradient(135deg,#6e421f,#4b2914);
   border:3px solid #2f180b;
   color:#fff;
@@ -329,7 +330,18 @@ button,input{font:inherit}
   font-weight:700;
   line-height:1.5;
 }
-.detail-done{margin-top:14px}
+.whole-table-button{
+  margin-top:14px;
+  background:linear-gradient(180deg,#182433,#101923);
+  color:#fff;
+}
+.whole-table-button:disabled{
+  background:#c8c5c1;
+  color:#777;
+  box-shadow:none;
+  cursor:not-allowed;
+}
+.detail-done{margin-top:10px}
 
 .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .form-field{display:flex;flex-direction:column;gap:6px}
@@ -491,6 +503,11 @@ button,input{font:inherit}
     </div>
 
     <div class="detail-summary" id="detailSummary">Zatím není vybrané žádné místo.</div>
+
+    <button class="modal-button whole-table-button" id="selectWholeTable">
+      VYBRAT CELÝ STŮL
+    </button>
+
     <button class="modal-button detail-done" id="detailDone">HOTOVO</button>
   </div>
 </div>
@@ -649,8 +666,18 @@ function createOverviewSeats(){
       group.appendChild(seat);
     }
 
-    group.addEventListener("click", () => {
+    const tableElement = group.querySelector(".table");
+
+    if(tableElement){
+      tableElement.addEventListener("click", event => {
+        event.stopPropagation();
+        openTableModal(tableNumber);
+      });
+    }
+
+    group.addEventListener("click", event => {
       if(window.innerWidth <= 900){
+        event.stopPropagation();
         openTableModal(tableNumber);
       }
     });
@@ -705,6 +732,7 @@ const tableModalTitle = document.getElementById("tableModalTitle");
 const detailTableNumber = document.getElementById("detailTableNumber");
 const detailSummary = document.getElementById("detailSummary");
 const detailSeats = document.querySelectorAll(".detail-seat");
+const selectWholeTableButton = document.getElementById("selectWholeTable");
 
 function openTableModal(tableNumber){
   activeTable = String(tableNumber);
@@ -745,6 +773,23 @@ function updateDetailModal(){
       `Vybraná místa u stolu ${activeTable}: <strong>${selectedAtTable.map(x => x.seat).join(", ")}</strong><br>` +
       `Cena: <strong>${(selectedAtTable.length * PRICE_PER_SEAT).toLocaleString("cs-CZ")} Kč</strong>`;
   }
+
+  const occupiedAtTable = Array.from({length:8}, (_,i) => i + 1)
+    .filter(seat => occupiedSeats.has(seatId(activeTable, seat)));
+
+  const allEightSelected = Array.from({length:8}, (_,i) => i + 1)
+    .every(seat => isSelected(activeTable, seat));
+
+  if(occupiedAtTable.length > 0){
+    selectWholeTableButton.disabled = true;
+    selectWholeTableButton.textContent = "CELÝ STŮL NENÍ VOLNÝ";
+  }else if(allEightSelected){
+    selectWholeTableButton.disabled = false;
+    selectWholeTableButton.textContent = "ZRUŠIT VÝBĚR CELÉHO STOLU";
+  }else{
+    selectWholeTableButton.disabled = false;
+    selectWholeTableButton.textContent = "VYBRAT CELÝ STŮL";
+  }
 }
 
 detailSeats.forEach(button => {
@@ -752,6 +797,44 @@ detailSeats.forEach(button => {
     if(!activeTable) return;
     toggleSeat(activeTable, button.dataset.seat);
   });
+});
+
+
+selectWholeTableButton.addEventListener("click", () => {
+  if(!activeTable) return;
+
+  const seats = Array.from({length:8}, (_,i) => i + 1);
+  const occupiedAtTable = seats.some(seat =>
+    occupiedSeats.has(seatId(activeTable, seat))
+  );
+
+  if(occupiedAtTable){
+    return;
+  }
+
+  const allSelected = seats.every(seat =>
+    isSelected(activeTable, seat)
+  );
+
+  if(allSelected){
+    selectedSeats = selectedSeats.filter(item =>
+      String(item.table) !== String(activeTable)
+    );
+  }else{
+    seats.forEach(seat => {
+      if(!isSelected(activeTable, seat)){
+        selectedSeats.push({
+          id: seatId(activeTable, seat),
+          table: Number(activeTable),
+          seat: Number(seat)
+        });
+      }
+    });
+  }
+
+  syncAllSeats();
+  updateSummary();
+  updateDetailModal();
 });
 
 document.getElementById("closeTableModal").addEventListener("click", closeTableModal);
@@ -909,7 +992,7 @@ reservationForm.addEventListener("submit", async event => {
     `<strong>Rezervace č. ${reservationNumber} byla úspěšně uložena.</strong><br>` +
     `Počet míst: ${reservedCount}<br>` +
     `Celková cena: ${totalPrice.toLocaleString("cs-CZ")} Kč<br>` +
-    `Místa jsou nyní rezervovaná po dobu 1 hodiny.`;
+    `Místa jsou nyní rezervovaná po dobu 5 dní.`;
 });
 
 /* OBNOVENÍ ROZPRACOVANÉHO VÝBĚRU */
@@ -982,4 +1065,3 @@ document.addEventListener("keydown", event => {
 </script>
 </body>
 </html>
-
