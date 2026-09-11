@@ -364,6 +364,33 @@ button,input{font:inherit}
   line-height:1.55;
 }
 .form-hint{font-size:13px;color:#7b7168;margin-top:10px}
+
+.payment-box{
+  display:none;
+  margin-top:18px;
+  padding:20px;
+  border-radius:16px;
+  background:#fff;
+  border:1px solid #dbc8a7;
+  text-align:center;
+}
+.payment-box h3{margin:0 0 8px;font-size:21px}
+.payment-box p{margin:7px 0;line-height:1.45}
+.payment-amount{font-size:28px;font-weight:800;margin:12px 0}
+.qr-wrap{
+  width:230px;
+  min-height:230px;
+  margin:16px auto;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#fff;
+  padding:10px;
+  border-radius:12px;
+}
+.qr-wrap img,.qr-wrap canvas{max-width:100%;height:auto}
+.payment-note{font-size:13px;color:#6f665e}
+
 .success{
   display:none;
   margin-top:14px;
@@ -539,7 +566,7 @@ button,input{font:inherit}
         </div>
 
         <div class="form-field">
-          <label for="phone">Telefon </label>
+          <label for="phone">Telefon</label>
           <input id="phone" name="phone" type="tel" autocomplete="tel">
         </div>
       </div>
@@ -549,11 +576,22 @@ button,input{font:inherit}
         Rezervace se ukládá do databáze a vybraná místa se po úspěšném odeslání zobrazí ostatním návštěvníkům jako obsazená.
       </div>
       <div class="success" id="successMessage"></div>
+
+      <div class="payment-box" id="paymentBox">
+        <h3>Platba vstupenek</h3>
+        <p>Pro dokončení rezervace prosím proveďte platbu do <strong>5 dní</strong>.</p>
+        <div class="payment-amount" id="paymentAmount"></div>
+        <div class="qr-wrap" id="paymentQr"></div>
+        <p><strong>Účet:</strong> 8212190017/5500</p>
+        <p id="paymentVs"></p>
+        <p class="payment-note">Po přijetí platby rezervaci potvrdíme.</p>
+      </div>
     </form>
   </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
 <script>
 /* =====================================================
@@ -569,6 +607,8 @@ const supabaseClient = supabase.createClient(
 );
 
 const PRICE_PER_SEAT = 780;
+const PAYMENT_IBAN = "CZ9455000000008212190017";
+const PAYMENT_ACCOUNT = "8212190017/5500";
 let selectedSeats = [];
 let activeTable = null;
 
@@ -849,6 +889,10 @@ const formModal = document.getElementById("formModal");
 const formSummary = document.getElementById("formSummary");
 const reservationForm = document.getElementById("reservationForm");
 const successMessage = document.getElementById("successMessage");
+const paymentBox = document.getElementById("paymentBox");
+const paymentAmount = document.getElementById("paymentAmount");
+const paymentQr = document.getElementById("paymentQr");
+const paymentVs = document.getElementById("paymentVs");
 
 function openFormModal(){
   if(selectedSeats.length === 0) return;
@@ -864,6 +908,8 @@ function openFormModal(){
 
   successMessage.style.display = "none";
   successMessage.textContent = "";
+  paymentBox.style.display = "none";
+  paymentQr.innerHTML = "";
 
   formModal.classList.add("open");
   formModal.setAttribute("aria-hidden","false");
@@ -992,7 +1038,29 @@ reservationForm.addEventListener("submit", async event => {
     `<strong>Rezervace byla úspěšně uložena.</strong><br>` +
     `Počet míst: ${reservedCount}<br>` +
     `Celková cena: ${totalPrice.toLocaleString("cs-CZ")} Kč<br>` +
-    `Místa jsou nyní rezervovaná po dobu 5 dní. Jakmile obdržíme platbu, rezervaci potvrdíme a vstupenky budou platné.`;
+    `Místa jsou nyní rezervovaná po dobu 5 dní.`;
+
+  const variableSymbol = String(reservationNumber);
+  const amountForQr = Number(totalPrice).toFixed(2);
+  const spd =
+    `SPD*1.0*ACC:${PAYMENT_IBAN}` +
+    `*AM:${amountForQr}` +
+    `*CC:CZK` +
+    `*X-VS:${variableSymbol}` +
+    `*MSG:Vstupenky HC BULDOGS`;
+
+  paymentAmount.textContent = `${totalPrice.toLocaleString("cs-CZ")} Kč`;
+  paymentVs.innerHTML = `<strong>Variabilní symbol:</strong> ${variableSymbol}`;
+  paymentQr.innerHTML = "";
+
+  new QRCode(paymentQr, {
+    text: spd,
+    width: 210,
+    height: 210,
+    correctLevel: QRCode.CorrectLevel.M
+  });
+
+  paymentBox.style.display = "block";
 });
 
 /* OBNOVENÍ ROZPRACOVANÉHO VÝBĚRU */
