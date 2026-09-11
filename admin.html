@@ -344,8 +344,21 @@ function renderReservations(){
   const expiredCount = reservations.filter(r => r.status === "expired").length;
   const cancelledCount = reservations.filter(r => r.status === "cancelled").length;
 
-  reservationSummary.textContent =
-    `Celkem ${reservations.length} rezervací • čeká ${reservedCount} • zaplaceno ${paidCount} • vypršelo ${expiredCount} • stornováno ${cancelledCount}`;
+  const paidReservations = reservations.filter(r => r.status === "paid");
+  const paidSeats = paidReservations.reduce(
+    (sum, r) => sum + Number(r.seat_count || 0),
+    0
+  );
+  const paidAmount = paidReservations.reduce(
+    (sum, r) => sum + Number(r.total_price || 0),
+    0
+  );
+
+  reservationSummary.innerHTML =
+    `<strong>Celkem ${reservations.length} rezervací</strong> • ` +
+    `čeká ${reservedCount} • zaplaceno ${paidCount} • vypršelo ${expiredCount} • stornováno ${cancelledCount}` +
+    `<br><br><strong>ZAPLACENÁ MÍSTA: ${paidSeats}</strong> • ` +
+    `<strong>CELKEM PŘIJATO: ${paidAmount.toLocaleString("cs-CZ")} Kč</strong>`;
 
   if(filtered.length === 0){
     reservationRows.innerHTML =
