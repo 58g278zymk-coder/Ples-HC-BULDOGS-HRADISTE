@@ -1,1 +1,735 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <title>Rezervace míst | 3. Hokejový ples HC BULDOGS</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4efe8;
+      color: #2d241c;
+    }
+
+    .page {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 25px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .topbar h1 {
+      font-size: 30px;
+    }
+
+    .back-button {
+      display: inline-block;
+      text-decoration: none;
+      color: white;
+      background: #1f3550;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    .hall-wrapper {
+      background: white;
+      padding: 25px;
+      border-radius: 20px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+      overflow-x: auto;
+    }
+
+    .hall {
+      position: relative;
+      min-width: 1050px;
+      height: 900px;
+      background:
+        linear-gradient(rgba(255,255,255,.12), rgba(255,255,255,.12)),
+        repeating-linear-gradient(
+          90deg,
+          #d9b784 0px,
+          #d9b784 40px,
+          #d3ac76 41px,
+          #d3ac76 80px
+        );
+
+      border: 12px solid #263646;
+      border-radius: 14px;
+    }
+
+    .stage {
+      position: absolute;
+      top: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 520px;
+      height: 70px;
+      background: #172536;
+      color: #e7bd6e;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      font-weight: bold;
+      letter-spacing: 3px;
+      box-shadow: 0 6px 15px rgba(0,0,0,.3);
+    }
+
+    .dance-floor {
+      position: absolute;
+      left: 50%;
+      top: 48%;
+      transform: translate(-50%, -50%);
+      font-size: 42px;
+      font-family: Georgia, serif;
+      font-style: italic;
+      color: rgba(103, 63, 25, 0.45);
+      pointer-events: none;
+    }
+
+    .entrance {
+      position: absolute;
+      bottom: 15px;
+      width: 120px;
+      height: 85px;
+      background: #f6e4c3;
+      border: 3px solid #765433;
+      border-radius: 50px 50px 0 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-weight: bold;
+      line-height: 1.15;
+    }
+
+    .entrance.left {
+      left: 25px;
+    }
+
+    .entrance.right {
+      right: 25px;
+    }
+
+    .table-group {
+      position: absolute;
+      width: 150px;
+      height: 115px;
+    }
+
+    .table {
+      position: absolute;
+      background: #5f351b;
+      border: 3px solid #2c160c;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 25px;
+      font-weight: bold;
+      box-shadow: 0 5px 8px rgba(0,0,0,.25);
+      z-index: 2;
+    }
+
+    .horizontal .table {
+      left: 25px;
+      top: 30px;
+      width: 100px;
+      height: 55px;
+    }
+
+    .vertical .table {
+      left: 47px;
+      top: 10px;
+      width: 56px;
+      height: 95px;
+    }
+
+    .seat {
+      position: absolute;
+      width: 27px;
+      height: 27px;
+      border: 2px solid #9b773c;
+      border-radius: 9px 9px 12px 12px;
+      background: #f1f1f1;
+      cursor: pointer;
+      z-index: 3;
+      transition: .15s ease;
+      box-shadow: 0 2px 4px rgba(0,0,0,.3);
+    }
+
+    .seat:hover {
+      transform: scale(1.15);
+    }
+
+    .seat.selected {
+      background: #e2a83c;
+      border-color: #8d5911;
+    }
+
+    .seat.occupied {
+      background: #d83c32;
+      border-color: #8a1711;
+      cursor: not-allowed;
+    }
+
+    .seat.occupied:hover {
+      transform: none;
+    }
+
+    /* horizontální stoly */
+
+    .horizontal .seat.top {
+      top: 0;
+    }
+
+    .horizontal .seat.bottom {
+      bottom: 0;
+    }
+
+    .horizontal .s1,
+    .horizontal .s5 {
+      left: 13px;
+    }
+
+    .horizontal .s2,
+    .horizontal .s6 {
+      left: 48px;
+    }
+
+    .horizontal .s3,
+    .horizontal .s7 {
+      left: 83px;
+    }
+
+    .horizontal .s4,
+    .horizontal .s8 {
+      left: 118px;
+    }
+
+    /* vertikální stoly */
+
+    .vertical .seat.left {
+      left: 5px;
+    }
+
+    .vertical .seat.right {
+      right: 5px;
+    }
+
+    .vertical .s1,
+    .vertical .s5 {
+      top: 5px;
+    }
+
+    .vertical .s2,
+    .vertical .s6 {
+      top: 34px;
+    }
+
+    .vertical .s3,
+    .vertical .s7 {
+      top: 63px;
+    }
+
+    .vertical .s4,
+    .vertical .s8 {
+      top: 92px;
+    }
+
+    /* umístění jednotlivých stolů */
+
+    #table11 { top: 115px; left: 285px; }
+    #table10 { top: 115px; left: 450px; }
+    #table9  { top: 115px; left: 615px; }
+
+    #table12 { top: 150px; left: 60px; }
+    #table13 { top: 290px; left: 60px; }
+    #table14 { top: 430px; left: 60px; }
+    #table15 { top: 570px; left: 60px; }
+    #table16 { top: 710px; left: 60px; }
+
+    #table8 { top: 150px; right: 60px; }
+    #table7 { top: 290px; right: 60px; }
+    #table6 { top: 430px; right: 60px; }
+    #table5 { top: 570px; right: 60px; }
+    #table4 { top: 710px; right: 60px; }
+
+    #table1 { bottom: 105px; left: 310px; }
+    #table2 { bottom: 105px; left: 455px; }
+    #table3 { bottom: 105px; left: 600px; }
+
+    .reservation-panel {
+      display: grid;
+      grid-template-columns: 1fr 1.3fr 1fr;
+      gap: 25px;
+      margin-top: 25px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 18px;
+      box-shadow: 0 7px 20px rgba(0,0,0,.08);
+    }
+
+    .legend-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 15px;
+    }
+
+    .legend-seat {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      border: 2px solid #9b773c;
+    }
+
+    .free {
+      background: #f1f1f1;
+    }
+
+    .chosen {
+      background: #e2a83c;
+    }
+
+    .taken {
+      background: #d83c32;
+    }
+
+    .summary-title {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    #selectedSeats {
+      min-height: 45px;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+
+    .price {
+      font-size: 32px;
+      font-weight: bold;
+      margin-top: 8px;
+    }
+
+    .reserve-button {
+      width: 100%;
+      padding: 18px;
+      border: 0;
+      border-radius: 12px;
+      background: linear-gradient(180deg, #e7b855, #ce8f22);
+      color: #21190f;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .reserve-button:disabled {
+      background: #d8d8d8;
+      color: #888;
+      cursor: not-allowed;
+    }
+
+    .button-note {
+      margin-top: 15px;
+      text-align: center;
+      color: #777;
+      font-size: 14px;
+    }
+
+    @media (max-width: 900px) {
+      .reservation-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .hall-wrapper {
+        padding: 8px;
+      }
+
+      .topbar h1 {
+        font-size: 23px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="page">
+
+  <div class="topbar">
+    <h1>Rezervace míst – 3. Hokejový ples</h1>
+
+    <a href="index.html" class="back-button">
+      ← Zpět na hlavní stránku
+    </a>
+  </div>
+
+  <div class="hall-wrapper">
+
+    <div class="hall">
+
+      <div class="stage">
+        PÓDIUM
+      </div>
+
+      <div class="dance-floor">
+        Taneční parket
+      </div>
+
+      <div class="entrance left">
+        ↑<br>VSTUP<br>DO SÁLU
+      </div>
+
+      <div class="entrance right">
+        ↑<br>VSTUP<br>DO SÁLU
+      </div>
+
+      <!-- STŮL 11 -->
+      <div class="table-group horizontal" id="table11" data-table="11">
+        <div class="table">11</div>
+      </div>
+
+      <!-- STŮL 10 -->
+      <div class="table-group horizontal" id="table10" data-table="10">
+        <div class="table">10</div>
+      </div>
+
+      <!-- STŮL 9 -->
+      <div class="table-group horizontal" id="table9" data-table="9">
+        <div class="table">9</div>
+      </div>
+
+      <!-- LEVÁ STRANA -->
+
+      <div class="table-group horizontal" id="table12" data-table="12">
+        <div class="table">12</div>
+      </div>
+
+      <div class="table-group horizontal" id="table13" data-table="13">
+        <div class="table">13</div>
+      </div>
+
+      <div class="table-group horizontal" id="table14" data-table="14">
+        <div class="table">14</div>
+      </div>
+
+      <div class="table-group horizontal" id="table15" data-table="15">
+        <div class="table">15</div>
+      </div>
+
+      <div class="table-group horizontal" id="table16" data-table="16">
+        <div class="table">16</div>
+      </div>
+
+      <!-- PRAVÁ STRANA -->
+
+      <div class="table-group horizontal" id="table8" data-table="8">
+        <div class="table">8</div>
+      </div>
+
+      <div class="table-group horizontal" id="table7" data-table="7">
+        <div class="table">7</div>
+      </div>
+
+      <div class="table-group horizontal" id="table6" data-table="6">
+        <div class="table">6</div>
+      </div>
+
+      <div class="table-group horizontal" id="table5" data-table="5">
+        <div class="table">5</div>
+      </div>
+
+      <div class="table-group horizontal" id="table4" data-table="4">
+        <div class="table">4</div>
+      </div>
+
+      <!-- SPODNÍ STOLY -->
+
+      <div class="table-group vertical" id="table1" data-table="1">
+        <div class="table">1</div>
+      </div>
+
+      <div class="table-group vertical" id="table2" data-table="2">
+        <div class="table">2</div>
+      </div>
+
+      <div class="table-group vertical" id="table3" data-table="3">
+        <div class="table">3</div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="reservation-panel">
+
+    <div class="card">
+
+      <div class="legend-row">
+        <div class="legend-seat free"></div>
+        <span>Volné místo</span>
+      </div>
+
+      <div class="legend-row">
+        <div class="legend-seat chosen"></div>
+        <span>Vybrané místo</span>
+      </div>
+
+      <div class="legend-row">
+        <div class="legend-seat taken"></div>
+        <span>Obsazené místo</span>
+      </div>
+
+    </div>
+
+    <div class="card">
+
+      <div class="summary-title">
+        Vybraná místa:
+      </div>
+
+      <div id="selectedSeats">
+        Zatím nevybráno
+      </div>
+
+      <div>
+        Celková cena:
+      </div>
+
+      <div class="price">
+        <span id="totalPrice">0</span> Kč
+      </div>
+
+    </div>
+
+    <div class="card">
+
+      <button
+        id="continueButton"
+        class="reserve-button"
+        disabled
+      >
+        POKRAČOVAT K REZERVACI
+      </button>
+
+      <div class="button-note" id="buttonNote">
+        Nejprve vyberte alespoň jedno místo.
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+
+const PRICE_PER_SEAT = 780;
+
+const tableGroups = document.querySelectorAll(".table-group");
+
+const selectedSeatsText = document.getElementById("selectedSeats");
+const totalPriceText = document.getElementById("totalPrice");
+
+const continueButton = document.getElementById("continueButton");
+const buttonNote = document.getElementById("buttonNote");
+
+let selectedSeats = [];
+
+
+/* VYTVOŘENÍ ŽIDLÍ */
+
+tableGroups.forEach(group => {
+
+  const tableNumber = group.dataset.table;
+
+  const isVertical = group.classList.contains("vertical");
+
+  for (let i = 1; i <= 8; i++) {
+
+    const seat = document.createElement("button");
+
+    seat.classList.add("seat");
+    seat.classList.add("s" + i);
+
+    seat.dataset.table = tableNumber;
+    seat.dataset.seat = i;
+
+    seat.title =
+      "Stůl " +
+      tableNumber +
+      " – místo " +
+      i;
+
+    if (isVertical) {
+
+      if (i <= 4) {
+        seat.classList.add("left");
+      } else {
+        seat.classList.add("right");
+      }
+
+    } else {
+
+      if (i <= 4) {
+        seat.classList.add("top");
+      } else {
+        seat.classList.add("bottom");
+      }
+
+    }
+
+    seat.addEventListener("click", function() {
+
+      if (seat.classList.contains("occupied")) {
+        return;
+      }
+
+      const seatId =
+        tableNumber +
+        "-" +
+        i;
+
+      if (seat.classList.contains("selected")) {
+
+        seat.classList.remove("selected");
+
+        selectedSeats =
+          selectedSeats.filter(
+            item => item.id !== seatId
+          );
+
+      } else {
+
+        seat.classList.add("selected");
+
+        selectedSeats.push({
+          id: seatId,
+          table: tableNumber,
+          seat: i
+        });
+
+      }
+
+      updateSummary();
+
+    });
+
+    group.appendChild(seat);
+
+  }
+
+});
+
+
+/* AKTUALIZACE SOUHRNU */
+
+function updateSummary() {
+
+  if (selectedSeats.length === 0) {
+
+    selectedSeatsText.textContent =
+      "Zatím nevybráno";
+
+    totalPriceText.textContent =
+      "0";
+
+    continueButton.disabled =
+      true;
+
+    buttonNote.textContent =
+      "Nejprve vyberte alespoň jedno místo.";
+
+    return;
+  }
+
+  const labels =
+    selectedSeats.map(item => {
+      return (
+        "Stůl " +
+        item.table +
+        " – místo " +
+        item.seat
+      );
+    });
+
+  selectedSeatsText.innerHTML =
+    labels.join("<br>");
+
+  const total =
+    selectedSeats.length *
+    PRICE_PER_SEAT;
+
+  totalPriceText.textContent =
+    total.toLocaleString("cs-CZ");
+
+  continueButton.disabled =
+    false;
+
+  buttonNote.textContent =
+    "Vybráno " +
+    selectedSeats.length +
+    " míst.";
+
+}
+
+
+/* POKRAČOVAT */
+
+continueButton.addEventListener("click", function() {
+
+  if (selectedSeats.length === 0) {
+    return;
+  }
+
+  const seats =
+    selectedSeats.map(item =>
+      item.table + "-" + item.seat
+    );
+
+  localStorage.setItem(
+    "selectedSeats",
+    JSON.stringify(selectedSeats)
+  );
+
+  localStorage.setItem(
+    "reservationPrice",
+    selectedSeats.length * PRICE_PER_SEAT
+  );
+
+  alert(
+    "Vybraná místa: " +
+    seats.join(", ") +
+    "\n\n" +
+    "Dalším krokem doplníme rezervační formulář."
+  );
+
+});
+
+</script>
+
+</body>
+</html>
