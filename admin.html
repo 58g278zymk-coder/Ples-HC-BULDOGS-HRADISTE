@@ -456,7 +456,59 @@ async function markPaid(id, button){
     return;
   }
 
-  showMessage(adminMessage, "Platba byla úspěšně potvrzena.", "ok");
+  // Platba je potvrzena. Nyní odešleme zákazníkovi potvrzovací e-mail.
+  let emailSent = false;
+
+  if(reservation){
+    try{
+      const seatsForEmail = String(reservation.seats || "")
+        .split(",")
+        .map(item => item.trim())
+        .map(item => {
+          const match = item.match(/Stůl\s+(\d+)\s*\/\s*místo\s+(\d+)/i);
+          return match
+            ? { table: Number(match[1]), seat: Number(match[2]) }
+            : null;
+        })
+        .filter(Boolean);
+
+      const { error: emailError } = await supabaseClient.functions.invoke(
+        "send-payment-confirmation",
+        {
+          body: {
+            email: reservation.email,
+            first_name: reservation.first_name,
+            last_name: reservation.last_name,
+            reservation_id: reservation.id,
+            seats: seatsForEmail,
+            total_price: Number(reservation.total_price || 0)
+          }
+        }
+      );
+
+      if(emailError){
+        console.error("Potvrzovací e-mail se nepodařilo odeslat:", emailError);
+      }else{
+        emailSent = true;
+      }
+    }catch(emailException){
+      console.error("Chyba při odesílání potvrzení platby:", emailException);
+    }
+  }
+
+  if(emailSent){
+    showMessage(
+      adminMessage,
+      "Platba byla potvrzena a zákazníkovi byl odeslán potvrzovací e-mail.",
+      "ok"
+    );
+  }else{
+    showMessage(
+      adminMessage,
+      "Platba byla potvrzena, ale potvrzovací e-mail se nepodařilo odeslat."
+    );
+  }
+
   await loadReservations();
 }
 
