@@ -15,7 +15,6 @@ body{
   color:#2d261f;
 }
 button,input{font:inherit}
-
 .header{
   max-width:1400px;
   margin:0 auto;
@@ -25,10 +24,7 @@ button,input{font:inherit}
   align-items:center;
   gap:16px;
 }
-.header h1{
-  margin:0;
-  font-size:30px;
-}
+.header h1{margin:0;font-size:30px}
 .back{
   text-decoration:none;
   background:#182433;
@@ -38,49 +34,20 @@ button,input{font:inherit}
   font-weight:700;
   white-space:nowrap;
 }
-
-.page{
-  max-width:1400px;
-  margin:auto;
-  padding:0 25px 40px;
-}
-
-.hall-scroll{
-  overflow-x:auto;
-  padding-bottom:10px;
-}
-
-/* =====================================================
-   SÁL
-===================================================== */
-
+.page{max-width:1400px;margin:auto;padding:0 25px 40px}
+.hall-scroll{overflow-x:auto;padding-bottom:10px}
 .hall{
   position:relative;
   width:1200px;
   height:1050px;
   margin:auto;
-
   border:14px solid #1d2a37;
   border-radius:16px;
-
-  box-shadow:
-    0 20px 50px rgba(0,0,0,.20),
-    inset 0 0 40px rgba(66,38,15,.15);
-
+  box-shadow:0 20px 50px rgba(0,0,0,.20),inset 0 0 40px rgba(66,38,15,.15);
   background:
-    repeating-linear-gradient(
-      90deg,
-      rgba(255,255,255,.07) 0 48px,
-      rgba(120,73,27,.05) 49px 50px
-    ),
-    linear-gradient(
-      90deg,
-      #d9b27a 0%,
-      #e9c894 50%,
-      #d7ae74 100%
-    );
+    repeating-linear-gradient(90deg,rgba(255,255,255,.07) 0 48px,rgba(120,73,27,.05) 49px 50px),
+    linear-gradient(90deg,#d9b27a 0%,#e9c894 50%,#d7ae74 100%);
 }
-
 .hall::after{
   content:"";
   position:absolute;
@@ -88,11 +55,6 @@ button,input{font:inherit}
   pointer-events:none;
   box-shadow:inset 0 0 80px rgba(73,43,16,.22);
 }
-
-/* =====================================================
-   PÓDIUM
-===================================================== */
-
 .stage{
   position:absolute;
   left:50%;
@@ -100,25 +62,17 @@ button,input{font:inherit}
   transform:translateX(-50%);
   width:590px;
   height:75px;
-
   border-radius:3px;
   background:linear-gradient(180deg,#182332,#101923);
   box-shadow:0 8px 16px rgba(0,0,0,.35);
-
   color:#d8ab5a;
   font-size:28px;
   font-weight:800;
   letter-spacing:4px;
-
   display:flex;
   align-items:center;
   justify-content:center;
 }
-
-/* =====================================================
-   PARKET
-===================================================== */
-
 .dance-floor{
   position:absolute;
   left:50%;
@@ -126,51 +80,32 @@ button,input{font:inherit}
   transform:translate(-50%,-50%);
   width:500px;
   text-align:center;
-
   color:rgba(109,69,32,.34);
   font-family:Georgia,serif;
   font-style:italic;
   font-size:48px;
-
   pointer-events:none;
   user-select:none;
 }
-
-.dance-icon{
-  font-size:80px;
-  opacity:.25;
-  line-height:1;
-}
-
-/* =====================================================
-   VSTUPY
-===================================================== */
-
+.dance-icon{font-size:80px;opacity:.25;line-height:1}
 .entrance{
   position:absolute;
   bottom:-1px;
-
   width:150px;
   height:105px;
-
   background:linear-gradient(180deg,#f3e0bc,#ddbb84);
-
   border:4px solid #4e3623;
   border-bottom:none;
   border-radius:80px 80px 0 0;
-
   display:flex;
   align-items:center;
   justify-content:center;
   flex-direction:column;
-
   font-weight:700;
   font-size:16px;
   text-align:center;
-
   z-index:4;
 }
-
 .entrance::before{
   content:"↑";
   display:block;
@@ -178,673 +113,314 @@ button,input{font:inherit}
   line-height:32px;
   margin-bottom:8px;
 }
+.entrance.left{left:24px}
+.entrance.right{right:24px}
 
-.entrance.left{
-  left:24px;
-}
-
-.entrance.right{
-  right:24px;
-}
-
-/* =====================================================
-   STOLY
-===================================================== */
-
-.table-group{
-  position:absolute;
-  z-index:5;
-}
-
+.table-group{position:absolute;z-index:5}
 .table{
   position:absolute;
-
+  cursor:pointer;
   background:linear-gradient(135deg,#6e421f,#4b2914);
   border:3px solid #2f180b;
-
   color:#fff;
-
   display:flex;
   align-items:center;
   justify-content:center;
-
   font-size:27px;
   font-weight:800;
-
   text-shadow:0 2px 3px rgba(0,0,0,.5);
-
-  box-shadow:
-    0 6px 8px rgba(0,0,0,.28),
-    inset 0 0 8px rgba(255,255,255,.12);
-
+  box-shadow:0 6px 8px rgba(0,0,0,.28),inset 0 0 8px rgba(255,255,255,.12);
   z-index:3;
 }
-
-/* =====================================================
-   ŽIDLE
-===================================================== */
-
 .seat{
   position:absolute;
-
   width:30px;
   height:30px;
   padding:0;
-
   border-radius:11px 11px 14px 14px;
   border:2px solid #9e7434;
-
   background:linear-gradient(180deg,#fff,#dfdfdf);
-
   cursor:pointer;
   z-index:4;
-
-  box-shadow:
-    0 3px 5px rgba(0,0,0,.35),
-    inset 0 0 4px rgba(255,255,255,.8);
-
-  transition:
-    transform .15s,
-    background .15s,
-    box-shadow .15s;
+  box-shadow:0 3px 5px rgba(0,0,0,.35),inset 0 0 4px rgba(255,255,255,.8);
+  transition:transform .15s,background .15s,box-shadow .15s;
 }
+.seat:hover{transform:scale(1.16);box-shadow:0 5px 9px rgba(0,0,0,.4)}
+.seat.selected{background:linear-gradient(180deg,#f6c85c,#d99a25);border-color:#a66710}
+.seat.occupied{background:linear-gradient(180deg,#ef5c52,#c72720);border-color:#8f1713;cursor:not-allowed}
+.seat.occupied:hover{transform:none}
 
-.seat:hover{
-  transform:scale(1.16);
-  box-shadow:0 5px 9px rgba(0,0,0,.4);
-}
-
-.seat.selected{
-  background:linear-gradient(180deg,#f6c85c,#d99a25);
-  border-color:#a66710;
-}
-
-.seat.occupied{
-  background:linear-gradient(180deg,#ef5c52,#c72720);
-  border-color:#8f1713;
-  cursor:not-allowed;
-}
-
-.seat.occupied:hover{
-  transform:none;
-}
-
-/* =====================================================
-   SVISLÉ STOLY
-===================================================== */
-
-.vertical{
-  width:130px;
-  height:155px;
-}
-
-.vertical .table{
-  width:58px;
-  height:115px;
-  left:36px;
-  top:20px;
-}
-
-.vertical .seat.side-a{
-  left:0;
-}
-
-.vertical .seat.side-b{
-  right:0;
-}
-
+.vertical{width:130px;height:155px}
+.vertical .table{width:58px;height:115px;left:36px;top:20px}
+.vertical .seat.side-a{left:0}
+.vertical .seat.side-b{right:0}
 .vertical .pos-1{top:8px}
 .vertical .pos-2{top:44px}
 .vertical .pos-3{top:80px}
 .vertical .pos-4{top:116px}
 
-/* =====================================================
-   VODOROVNÉ STOLY
-===================================================== */
-
-.horizontal{
-  width:155px;
-  height:130px;
-}
-
-.horizontal .table{
-  width:115px;
-  height:58px;
-  left:20px;
-  top:36px;
-}
-
-.horizontal .seat.side-a{
-  top:0;
-}
-
-.horizontal .seat.side-b{
-  bottom:0;
-}
-
+.horizontal{width:155px;height:130px}
+.horizontal .table{width:115px;height:58px;left:20px;top:36px}
+.horizontal .seat.side-a{top:0}
+.horizontal .seat.side-b{bottom:0}
 .horizontal .pos-1{left:8px}
 .horizontal .pos-2{left:45px}
 .horizontal .pos-3{left:82px}
 .horizontal .pos-4{left:119px}
 
-/* =====================================================
-   ROZMÍSTĚNÍ STOLŮ
-===================================================== */
-
-/* nahoře */
+/* ROZMÍSTĚNÍ STOLŮ */
 #table11{top:85px;left:320px}
 #table10{top:85px;left:535px}
 #table9{top:84px;left:750px}
-
-/* vlevo */
 #table12{left:-1px;top:145px}
 #table13{left:-1px;top:285px}
 #table14{left:-1px;top:425px}
 #table15{left:-1px;top:565px}
 #table16{left:-1px;top:705px}
-
-/* vpravo */
 #table8{right:-1px;top:145px}
 #table7{right:-1px;top:285px}
 #table6{right:-1px;top:425px}
 #table5{right:-1px;top:565px}
 #table4{right:-1px;top:705px}
-
-/* dole */
 #table1{left:335px;bottom:1px}
 #table2{left:535px;bottom:1px}
 #table3{left:735px;bottom:1px}
 
-/* =====================================================
-   SPODNÍ PANEL
-===================================================== */
-
 .reservation-panel{
   margin-top:25px;
-
   display:grid;
-
-  grid-template-columns:
-    minmax(250px,.9fr)
-    minmax(300px,1.25fr)
-    minmax(300px,1.1fr);
-
+  grid-template-columns:minmax(250px,.9fr) minmax(300px,1.25fr) minmax(300px,1.1fr);
   gap:25px;
 }
-
 .card{
   background:rgba(255,255,255,.94);
   border-radius:20px;
   padding:28px 30px;
-
-  box-shadow:
-    0 10px 30px rgba(0,0,0,.08);
-
+  box-shadow:0 10px 30px rgba(0,0,0,.08);
   min-height:180px;
 }
-
-.legend-row{
-  display:flex;
-  align-items:center;
-  gap:18px;
-  margin-bottom:20px;
-  font-size:17px;
-}
-
-.legend-row:last-child{
-  margin-bottom:0;
-}
-
+.legend-row{display:flex;align-items:center;gap:18px;margin-bottom:20px;font-size:17px}
+.legend-row:last-child{margin-bottom:0}
 .legend-chair{
   width:35px;
   height:35px;
-
   border-radius:11px 11px 15px 15px;
   border:2px solid #9e7434;
-
-  box-shadow:
-    0 3px 5px rgba(0,0,0,.2);
+  box-shadow:0 3px 5px rgba(0,0,0,.2)
 }
-
-.legend-chair.free{
-  background:linear-gradient(#fff,#ddd);
-}
-
-.legend-chair.selected{
-  background:linear-gradient(#f6c85c,#d99a25);
-}
-
-.legend-chair.occupied{
-  background:linear-gradient(#ef5c52,#c72720);
-}
-
-.label,
-.price-label{
-  font-size:16px;
-  color:#555;
-}
-
-.label{
-  margin-bottom:8px;
-}
-
-#selectedSeats{
-  min-height:50px;
-  font-weight:700;
-  line-height:1.55;
-  margin-bottom:22px;
-}
-
-.price{
-  margin-top:6px;
-  font-size:34px;
-  font-weight:800;
-}
-
-.action-card{
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-}
-
-.reserve-button,
-.modal-button{
+.legend-chair.free{background:linear-gradient(#fff,#ddd)}
+.legend-chair.selected{background:linear-gradient(#f6c85c,#d99a25)}
+.legend-chair.occupied{background:linear-gradient(#ef5c52,#c72720)}
+.label,.price-label{font-size:16px;color:#555}
+.label{margin-bottom:8px}
+#selectedSeats{min-height:50px;font-weight:700;line-height:1.55;margin-bottom:22px}
+.price{margin-top:6px;font-size:34px;font-weight:800}
+.action-card{display:flex;flex-direction:column;justify-content:center}
+.reserve-button,.modal-button{
   width:100%;
   border:none;
   border-radius:12px;
   padding:18px;
-
   font-size:18px;
   font-weight:800;
-
   cursor:pointer;
-
   background:linear-gradient(180deg,#e8b94f,#ce8c24);
   color:#211708;
-
-  box-shadow:
-    0 5px 12px rgba(139,87,20,.25);
+  box-shadow:0 5px 12px rgba(139,87,20,.25);
 }
-
 .reserve-button:disabled{
   background:#d9d7d3;
   color:#92908d;
   box-shadow:none;
   cursor:not-allowed;
 }
+.note{margin-top:18px;text-align:center;color:#888;font-size:14px}
 
-.note{
-  margin-top:18px;
-  text-align:center;
-  color:#888;
-  font-size:14px;
-}
-
-/* =====================================================
-   MODAL
-===================================================== */
-
+/* MODAL – DETAIL STOLU + FORMULÁŘ */
 .modal{
   position:fixed;
   inset:0;
-
   z-index:9999;
-
   display:none;
   align-items:center;
   justify-content:center;
-
   padding:18px;
-
   background:rgba(11,18,25,.72);
 }
-
-.modal.open{
-  display:flex;
-}
-
+.modal.open{display:flex}
 .modal-box{
   position:relative;
-
   width:min(100%,520px);
   max-height:92vh;
   overflow:auto;
-
   background:#f8f3ea;
-
   border-radius:22px;
-
   padding:24px;
-
-  box-shadow:
-    0 25px 70px rgba(0,0,0,.35);
+  box-shadow:0 25px 70px rgba(0,0,0,.35);
 }
-
 .modal-close{
   position:absolute;
   top:12px;
   right:12px;
-
   width:42px;
   height:42px;
-
   border:0;
   border-radius:50%;
-
   background:#182433;
   color:#fff;
-
   font-size:25px;
-
   cursor:pointer;
 }
+.modal-title{margin:0 52px 6px 0;font-size:26px}
+.modal-subtitle{margin:0 0 18px;color:#6c6257}
 
-.modal-title{
-  margin:0 52px 6px 0;
-  font-size:26px;
-}
-
-.modal-subtitle{
-  margin:0 0 18px;
-  color:#6c6257;
-}
-
-/* =====================================================
-   ZVĚTŠENÝ DETAIL STOLU
-===================================================== */
-
+/* Zvětšený detail stolu */
 .detail-area{
   position:relative;
-
   width:100%;
   height:390px;
-
   margin:10px 0 18px;
-
   border:2px solid rgba(90,55,25,.18);
   border-radius:18px;
-
   background:linear-gradient(90deg,#dfba82,#eccb99);
 }
-
 .detail-table{
   position:absolute;
-
   left:50%;
   top:50%;
-
   transform:translate(-50%,-50%);
-
   width:120px;
   height:230px;
-
   border:4px solid #2f180b;
   border-radius:8px;
-
   background:linear-gradient(135deg,#6e421f,#4b2914);
-
   color:#fff;
-
   display:flex;
   align-items:center;
   justify-content:center;
-
   font-size:42px;
   font-weight:800;
 }
-
 .detail-seat{
   position:absolute;
-
   width:62px;
   height:62px;
-
   border-radius:18px 18px 22px 22px;
   border:3px solid #9e7434;
-
   background:linear-gradient(180deg,#fff,#dfdfdf);
-
   font-weight:800;
   font-size:17px;
-
   cursor:pointer;
-
-  box-shadow:
-    0 6px 12px rgba(0,0,0,.22);
+  box-shadow:0 6px 12px rgba(0,0,0,.22);
 }
-
-.detail-seat.selected{
-  background:linear-gradient(180deg,#f6c85c,#d99a25);
-  border-color:#a66710;
-}
-
-.detail-seat.occupied{
-  background:linear-gradient(180deg,#ef5c52,#c72720);
-  border-color:#8f1713;
-  color:#fff;
-  cursor:not-allowed;
-}
-
-.detail-seat[data-seat="1"]{
-  left:34px;
-  top:28px;
-}
-
-.detail-seat[data-seat="2"]{
-  left:34px;
-  top:108px;
-}
-
-.detail-seat[data-seat="3"]{
-  left:34px;
-  top:188px;
-}
-
-.detail-seat[data-seat="4"]{
-  left:34px;
-  top:268px;
-}
-
-.detail-seat[data-seat="5"]{
-  right:34px;
-  top:28px;
-}
-
-.detail-seat[data-seat="6"]{
-  right:34px;
-  top:108px;
-}
-
-.detail-seat[data-seat="7"]{
-  right:34px;
-  top:188px;
-}
-
-.detail-seat[data-seat="8"]{
-  right:34px;
-  top:268px;
-}
-
+.detail-seat.selected{background:linear-gradient(180deg,#f6c85c,#d99a25);border-color:#a66710}
+.detail-seat.occupied{background:linear-gradient(180deg,#ef5c52,#c72720);border-color:#8f1713;color:#fff;cursor:not-allowed}
+.detail-seat[data-seat="1"]{left:34px;top:28px}
+.detail-seat[data-seat="2"]{left:34px;top:108px}
+.detail-seat[data-seat="3"]{left:34px;top:188px}
+.detail-seat[data-seat="4"]{left:34px;top:268px}
+.detail-seat[data-seat="5"]{right:34px;top:28px}
+.detail-seat[data-seat="6"]{right:34px;top:108px}
+.detail-seat[data-seat="7"]{right:34px;top:188px}
+.detail-seat[data-seat="8"]{right:34px;top:268px}
 .detail-summary{
   padding:14px 16px;
   border-radius:12px;
   background:#fff;
-
   font-weight:700;
   line-height:1.5;
 }
-
-.detail-done{
+.whole-table-button{
   margin-top:14px;
+  background:linear-gradient(180deg,#182433,#101923);
+  color:#fff;
 }
-
-/* =====================================================
-   FORMULÁŘ
-===================================================== */
-
-.form-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
+.whole-table-button:disabled{
+  background:#c8c5c1;
+  color:#777;
+  box-shadow:none;
+  cursor:not-allowed;
 }
+.detail-done{margin-top:10px}
 
-.form-field{
-  display:flex;
-  flex-direction:column;
-  gap:6px;
-}
-
-.form-field.full{
-  grid-column:1/-1;
-}
-
-.form-field label{
-  font-weight:700;
-  font-size:14px;
-}
-
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.form-field{display:flex;flex-direction:column;gap:6px}
+.form-field.full{grid-column:1/-1}
+.form-field label{font-weight:700;font-size:14px}
 .form-field input{
   width:100%;
-
   border:1px solid #cabba8;
   border-radius:10px;
-
   padding:13px 14px;
-
   background:#fff;
   outline:none;
 }
-
-.form-field input:focus{
-  border-color:#b27d27;
-
-  box-shadow:
-    0 0 0 3px rgba(178,125,39,.12);
-}
-
+.form-field input:focus{border-color:#b27d27;box-shadow:0 0 0 3px rgba(178,125,39,.12)}
 .form-summary{
   margin:18px 0;
-
   padding:14px 16px;
-
   border-radius:12px;
-
   background:#fff;
-
   line-height:1.55;
 }
+.form-hint{font-size:13px;color:#7b7168;margin-top:10px}
 
-.form-hint{
-  font-size:13px;
-  color:#7b7168;
-  margin-top:10px;
+.payment-box{
+  display:none;
+  margin-top:18px;
+  padding:20px;
+  border-radius:16px;
+  background:#fff;
+  border:1px solid #dbc8a7;
+  text-align:center;
 }
+.payment-box h3{margin:0 0 8px;font-size:21px}
+.payment-box p{margin:7px 0;line-height:1.45}
+.payment-amount{font-size:28px;font-weight:800;margin:12px 0}
+.qr-wrap{
+  width:230px;
+  min-height:230px;
+  margin:16px auto;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#fff;
+  padding:10px;
+  border-radius:12px;
+}
+.qr-wrap img,.qr-wrap canvas{max-width:100%;height:auto}
+.payment-note{font-size:13px;color:#6f665e}
 
 .success{
   display:none;
-
   margin-top:14px;
-
   padding:14px;
-
   border-radius:12px;
-
   background:#eef8ec;
   color:#2d5d29;
-
   font-weight:700;
 }
 
-/* =====================================================
-   MOBIL
-===================================================== */
-
-.mobile-info{
-  display:none;
-}
-
+/* MOBIL */
+.mobile-info{display:none}
 @media(max-width:900px){
+  body{overflow-x:hidden}
+  .header{padding:14px 12px 10px;gap:10px}
+  .header h1{font-size:18px;line-height:1.2}
+  .back{padding:10px 12px;font-size:14px}
+  .page{width:100%;padding:0 8px 25px}
+  .hall-scroll{position:relative;overflow:hidden;padding:0;margin:0 auto 12px}
+  .hall{margin:0;transform-origin:top left}
+  .reservation-panel{grid-template-columns:1fr;gap:12px;margin-top:15px}
+  .card{padding:18px;min-height:auto;border-radius:14px}
+  .legend-row{margin-bottom:12px;gap:12px;font-size:15px}
+  .legend-chair{width:30px;height:30px}
+  .price{font-size:28px}
+  .reserve-button{min-height:56px;padding:16px;font-size:16px}
 
-  body{
-    overflow-x:hidden;
-  }
-
-  .header{
-    padding:14px 12px 10px;
-    gap:10px;
-  }
-
-  .header h1{
-    font-size:18px;
-    line-height:1.2;
-  }
-
-  .back{
-    padding:10px 12px;
-    font-size:14px;
-  }
-
-  .page{
-    width:100%;
-    padding:0 8px 25px;
-  }
-
-  .hall-scroll{
-    position:relative;
-    overflow:hidden;
-    padding:0;
-    margin:0 auto 12px;
-  }
-
-  .hall{
-    margin:0;
-    transform-origin:top left;
-  }
-
-  .reservation-panel{
-    grid-template-columns:1fr;
-    gap:12px;
-    margin-top:15px;
-  }
-
-  .card{
-    padding:18px;
-    min-height:auto;
-    border-radius:14px;
-  }
-
-  .legend-row{
-    margin-bottom:12px;
-    gap:12px;
-    font-size:15px;
-  }
-
-  .legend-chair{
-    width:30px;
-    height:30px;
-  }
-
-  .price{
-    font-size:28px;
-  }
-
-  .reserve-button{
-    min-height:56px;
-    padding:16px;
-    font-size:16px;
-  }
-
-  /*
-  Na mobilu se kliká na celý stůl.
-  */
-  .table-group{
-    cursor:pointer;
-  }
-
-  .table-group .seat{
-    pointer-events:none;
-  }
-
+  /* Na mobilu se kliká na celý stůl a otevře se jeho velký detail */
+  .table-group{cursor:pointer}
+  .table-group .seat{pointer-events:none}
   .table-group::after{
     content:"";
     position:absolute;
@@ -852,1771 +428,734 @@ button,input{font:inherit}
     z-index:8;
   }
 
-  .modal{
-    padding:10px;
-  }
-
-  .modal-box{
-    padding:20px 14px 16px;
-    border-radius:18px;
-  }
-
-  .modal-title{
-    font-size:23px;
-  }
-
-  .detail-area{
-    height:350px;
-  }
-
-  .detail-table{
-    width:105px;
-    height:210px;
-    font-size:38px;
-  }
-
-  .detail-seat{
-    width:58px;
-    height:58px;
-    font-size:16px;
-  }
-
-  .detail-seat[data-seat="1"]{
-    left:20px;
-    top:20px;
-  }
-
-  .detail-seat[data-seat="2"]{
-    left:20px;
-    top:91px;
-  }
-
-  .detail-seat[data-seat="3"]{
-    left:20px;
-    top:162px;
-  }
-
-  .detail-seat[data-seat="4"]{
-    left:20px;
-    top:233px;
-  }
-
-  .detail-seat[data-seat="5"]{
-    right:20px;
-    top:20px;
-  }
-
-  .detail-seat[data-seat="6"]{
-    right:20px;
-    top:91px;
-  }
-
-  .detail-seat[data-seat="7"]{
-    right:20px;
-    top:162px;
-  }
-
-  .detail-seat[data-seat="8"]{
-    right:20px;
-    top:233px;
-  }
-
-  .form-grid{
-    grid-template-columns:1fr;
-  }
-
-  .form-field.full{
-    grid-column:auto;
-  }
+  .modal{padding:10px}
+  .modal-box{padding:20px 14px 16px;border-radius:18px}
+  .modal-title{font-size:23px}
+  .detail-area{height:350px}
+  .detail-table{width:105px;height:210px;font-size:38px}
+  .detail-seat{width:58px;height:58px;font-size:16px}
+  .detail-seat[data-seat="1"]{left:20px;top:20px}
+  .detail-seat[data-seat="2"]{left:20px;top:91px}
+  .detail-seat[data-seat="3"]{left:20px;top:162px}
+  .detail-seat[data-seat="4"]{left:20px;top:233px}
+  .detail-seat[data-seat="5"]{right:20px;top:20px}
+  .detail-seat[data-seat="6"]{right:20px;top:91px}
+  .detail-seat[data-seat="7"]{right:20px;top:162px}
+  .detail-seat[data-seat="8"]{right:20px;top:233px}
+  .form-grid{grid-template-columns:1fr}
+  .form-field.full{grid-column:auto}
 }
-
 </style>
 </head>
 
 <body>
-
 <header class="header">
-
-  <h1>
-    Rezervace míst – 3. Hokejový ples
-  </h1>
-
-  <a href="index.html" class="back">
-    ← Zpět
-  </a>
-
+  <h1>Rezervace míst – 3. Hokejový ples</h1>
+  <a href="index.html" class="back">← Zpět</a>
 </header>
 
-
 <main class="page">
-
   <div class="hall-scroll">
-
     <div class="hall">
-
-      <div class="stage">
-        PÓDIUM
-      </div>
+      <div class="stage">PÓDIUM</div>
 
       <div class="dance-floor">
-
-        <div class="dance-icon">
-          ♫
-        </div>
-
+        <div class="dance-icon">♫</div>
         Taneční parket
-
       </div>
 
+      <div class="entrance left">VSTUP<br>DO SÁLU</div>
+      <div class="entrance right">VSTUP<br>DO SÁLU</div>
 
-      <div class="entrance left">
-        VSTUP<br>
-        DO SÁLU
-      </div>
+      <div class="table-group vertical" id="table11" data-table="11"><div class="table">11</div></div>
+      <div class="table-group vertical" id="table10" data-table="10"><div class="table">10</div></div>
+      <div class="table-group vertical" id="table9" data-table="9"><div class="table">9</div></div>
 
-      <div class="entrance right">
-        VSTUP<br>
-        DO SÁLU
-      </div>
+      <div class="table-group horizontal" id="table12" data-table="12"><div class="table">12</div></div>
+      <div class="table-group horizontal" id="table13" data-table="13"><div class="table">13</div></div>
+      <div class="table-group horizontal" id="table14" data-table="14"><div class="table">14</div></div>
+      <div class="table-group horizontal" id="table15" data-table="15"><div class="table">15</div></div>
+      <div class="table-group horizontal" id="table16" data-table="16"><div class="table">16</div></div>
 
+      <div class="table-group horizontal" id="table8" data-table="8"><div class="table">8</div></div>
+      <div class="table-group horizontal" id="table7" data-table="7"><div class="table">7</div></div>
+      <div class="table-group horizontal" id="table6" data-table="6"><div class="table">6</div></div>
+      <div class="table-group horizontal" id="table5" data-table="5"><div class="table">5</div></div>
+      <div class="table-group horizontal" id="table4" data-table="4"><div class="table">4</div></div>
 
-      <!-- HORNÍ STOLY -->
-
-      <div class="table-group vertical" id="table11" data-table="11">
-        <div class="table">11</div>
-      </div>
-
-      <div class="table-group vertical" id="table10" data-table="10">
-        <div class="table">10</div>
-      </div>
-
-      <div class="table-group vertical" id="table9" data-table="9">
-        <div class="table">9</div>
-      </div>
-
-
-      <!-- LEVÁ STRANA -->
-
-      <div class="table-group horizontal" id="table12" data-table="12">
-        <div class="table">12</div>
-      </div>
-
-      <div class="table-group horizontal" id="table13" data-table="13">
-        <div class="table">13</div>
-      </div>
-
-      <div class="table-group horizontal" id="table14" data-table="14">
-        <div class="table">14</div>
-      </div>
-
-      <div class="table-group horizontal" id="table15" data-table="15">
-        <div class="table">15</div>
-      </div>
-
-      <div class="table-group horizontal" id="table16" data-table="16">
-        <div class="table">16</div>
-      </div>
-
-
-      <!-- PRAVÁ STRANA -->
-
-      <div class="table-group horizontal" id="table8" data-table="8">
-        <div class="table">8</div>
-      </div>
-
-      <div class="table-group horizontal" id="table7" data-table="7">
-        <div class="table">7</div>
-      </div>
-
-      <div class="table-group horizontal" id="table6" data-table="6">
-        <div class="table">6</div>
-      </div>
-
-      <div class="table-group horizontal" id="table5" data-table="5">
-        <div class="table">5</div>
-      </div>
-
-      <div class="table-group horizontal" id="table4" data-table="4">
-        <div class="table">4</div>
-      </div>
-
-
-      <!-- SPODNÍ STOLY -->
-
-      <div class="table-group vertical" id="table1" data-table="1">
-        <div class="table">1</div>
-      </div>
-
-      <div class="table-group vertical" id="table2" data-table="2">
-        <div class="table">2</div>
-      </div>
-
-      <div class="table-group vertical" id="table3" data-table="3">
-        <div class="table">3</div>
-      </div>
-
+      <div class="table-group vertical" id="table1" data-table="1"><div class="table">1</div></div>
+      <div class="table-group vertical" id="table2" data-table="2"><div class="table">2</div></div>
+      <div class="table-group vertical" id="table3" data-table="3"><div class="table">3</div></div>
     </div>
-
   </div>
-
-
-  <!-- SPODNÍ PANEL -->
 
   <section class="reservation-panel">
-
     <div class="card">
-
-      <div class="legend-row">
-
-        <div class="legend-chair free"></div>
-
-        <span>
-          Volné místo
-        </span>
-
-      </div>
-
-      <div class="legend-row">
-
-        <div class="legend-chair selected"></div>
-
-        <span>
-          Vybrané místo
-        </span>
-
-      </div>
-
-      <div class="legend-row">
-
-        <div class="legend-chair occupied"></div>
-
-        <span>
-          Obsazené místo
-        </span>
-
-      </div>
-
+      <div class="legend-row"><div class="legend-chair free"></div><span>Volné místo</span></div>
+      <div class="legend-row"><div class="legend-chair selected"></div><span>Vybrané místo</span></div>
+      <div class="legend-row"><div class="legend-chair occupied"></div><span>Obsazené místo</span></div>
     </div>
 
-
     <div class="card">
-
-      <div class="label">
-        Vybraná místa:
-      </div>
-
-      <div id="selectedSeats">
-        Zatím nevybráno
-      </div>
-
-      <div class="price-label">
-        Celková cena:
-      </div>
-
-      <div class="price">
-        <span id="totalPrice">0</span> Kč
-      </div>
-
+      <div class="label">Vybraná místa:</div>
+      <div id="selectedSeats">Zatím nevybráno</div>
+      <div class="price-label">Celková cena:</div>
+      <div class="price"><span id="totalPrice">0</span> Kč</div>
     </div>
-
 
     <div class="card action-card">
-
-      <button
-        id="continueButton"
-        class="reserve-button"
-        disabled
-      >
-        POKRAČOVAT K REZERVACI
-      </button>
-
-      <div class="note" id="buttonNote">
-        Nejprve vyberte alespoň jedno místo.
-      </div>
-
+      <button id="continueButton" class="reserve-button" disabled>POKRAČOVAT K REZERVACI</button>
+      <div class="note" id="buttonNote">Nejprve vyberte alespoň jedno místo.</div>
     </div>
-
   </section>
-
 </main>
 
-
-<!-- =====================================================
-     DETAIL STOLU
-===================================================== -->
-
+<!-- DETAIL STOLU -->
 <div class="modal" id="tableModal" aria-hidden="true">
-
   <div class="modal-box">
-
-    <button
-      class="modal-close"
-      id="closeTableModal"
-      aria-label="Zavřít"
-    >
-      ×
-    </button>
-
-    <h2 class="modal-title" id="tableModalTitle">
-      Stůl
-    </h2>
-
-    <p class="modal-subtitle">
-      Klepněte na místa, která chcete rezervovat.
-    </p>
-
+    <button class="modal-close" id="closeTableModal" aria-label="Zavřít">×</button>
+    <h2 class="modal-title" id="tableModalTitle">Stůl</h2>
+    <p class="modal-subtitle">Klepněte na místa, která chcete rezervovat.</p>
 
     <div class="detail-area">
-
-      <div
-        class="detail-table"
-        id="detailTableNumber"
-      >
-        1
-      </div>
-
-
-      <button class="detail-seat" data-seat="1">
-        1
-      </button>
-
-      <button class="detail-seat" data-seat="2">
-        2
-      </button>
-
-      <button class="detail-seat" data-seat="3">
-        3
-      </button>
-
-      <button class="detail-seat" data-seat="4">
-        4
-      </button>
-
-      <button class="detail-seat" data-seat="5">
-        5
-      </button>
-
-      <button class="detail-seat" data-seat="6">
-        6
-      </button>
-
-      <button class="detail-seat" data-seat="7">
-        7
-      </button>
-
-      <button class="detail-seat" data-seat="8">
-        8
-      </button>
-
+      <div class="detail-table" id="detailTableNumber">1</div>
+      <button class="detail-seat" data-seat="1">1</button>
+      <button class="detail-seat" data-seat="2">2</button>
+      <button class="detail-seat" data-seat="3">3</button>
+      <button class="detail-seat" data-seat="4">4</button>
+      <button class="detail-seat" data-seat="5">5</button>
+      <button class="detail-seat" data-seat="6">6</button>
+      <button class="detail-seat" data-seat="7">7</button>
+      <button class="detail-seat" data-seat="8">8</button>
     </div>
 
+    <div class="detail-summary" id="detailSummary">Zatím není vybrané žádné místo.</div>
 
-    <div
-      class="detail-summary"
-      id="detailSummary"
-    >
-      Zatím není vybrané žádné místo.
-    </div>
-
-
-    <button
-      class="modal-button detail-done"
-      id="detailDone"
-    >
-      HOTOVO
+    <button class="modal-button whole-table-button" id="selectWholeTable">
+      VYBRAT CELÝ STŮL
     </button>
 
+    <button class="modal-button detail-done" id="detailDone">HOTOVO</button>
   </div>
-
 </div>
 
-
-<!-- =====================================================
-     FORMULÁŘ REZERVACE
-===================================================== -->
-
-<div
-  class="modal"
-  id="formModal"
-  aria-hidden="true"
->
-
+<!-- FORMULÁŘ REZERVACE -->
+<div class="modal" id="formModal" aria-hidden="true">
   <div class="modal-box">
+    <button class="modal-close" id="closeFormModal" aria-label="Zavřít">×</button>
+    <h2 class="modal-title">Dokončení rezervace</h2>
+    <p class="modal-subtitle">Zkontrolujte místa a vyplňte kontaktní údaje.</p>
 
-    <button
-      class="modal-close"
-      id="closeFormModal"
-      aria-label="Zavřít"
-    >
-      ×
-    </button>
-
-
-    <h2 class="modal-title">
-      Dokončení rezervace
-    </h2>
-
-    <p class="modal-subtitle">
-      Zkontrolujte místa a vyplňte kontaktní údaje.
-    </p>
-
-
-    <div
-      class="form-summary"
-      id="formSummary"
-    ></div>
-
+    <div class="form-summary" id="formSummary"></div>
 
     <form id="reservationForm">
-
       <div class="form-grid">
-
-
         <div class="form-field">
-
-          <label for="firstName">
-            Jméno *
-          </label>
-
-          <input
-            id="firstName"
-            name="firstName"
-            required
-            autocomplete="given-name"
-          >
-
+          <label for="firstName">Jméno *</label>
+          <input id="firstName" name="firstName" required autocomplete="given-name">
         </div>
 
-
         <div class="form-field">
-
-          <label for="lastName">
-            Příjmení *
-          </label>
-
-          <input
-            id="lastName"
-            name="lastName"
-            required
-            autocomplete="family-name"
-          >
-
+          <label for="lastName">Příjmení *</label>
+          <input id="lastName" name="lastName" required autocomplete="family-name">
         </div>
 
-
         <div class="form-field">
-
-          <label for="email">
-            E-mail *
-          </label>
-
-          <input
-            id="email"
-            name="email"
-            type="email"
-            required
-            autocomplete="email"
-          >
-
+          <label for="email">E-mail *</label>
+          <input id="email" name="email" type="email" required autocomplete="email">
         </div>
 
-
         <div class="form-field">
-
-          <label for="phone">
-            Telefon *
-          </label>
-
-          <input
-            id="phone"
-            name="phone"
-            type="tel"
-            required
-            autocomplete="tel"
-          >
-
+          <label for="phone">Telefon</label>
+          <input id="phone" name="phone" type="tel" autocomplete="tel">
         </div>
-
       </div>
 
-
-      <button
-        class="modal-button"
-        type="submit"
-        style="margin-top:18px"
-      >
-        ODESLAT REZERVACI
-      </button>
-
-
+      <button class="modal-button" type="submit" style="margin-top:18px">ODESLAT REZERVACI</button>
       <div class="form-hint">
-        Tato verze ukládá rezervaci pouze do tohoto zařízení.
-        Pro skutečné blokování míst mezi více návštěvníky bude potřeba
-        napojit databázi.
+        Rezervace se ukládá do databáze a vybraná místa se po úspěšném odeslání zobrazí ostatním návštěvníkům jako obsazená.
       </div>
+      <div class="success" id="successMessage"></div>
 
-
-      <div
-        class="success"
-        id="successMessage"
-      ></div>
-
+      <div class="payment-box" id="paymentBox">
+        <h3>Platba vstupenek</h3>
+        <p>Pro dokončení rezervace prosím proveďte platbu do <strong>5 dní</strong>.</p>
+        <div class="payment-amount" id="paymentAmount"></div>
+        <div class="qr-wrap" id="paymentQr"></div>
+        <p><strong>Účet:</strong> 8212190017/5500</p>
+        <p id="paymentVs"></p>
+        <p class="payment-note">Po přijetí platby rezervaci potvrdíme.</p>
+      </div>
     </form>
-
   </div>
-
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
 <script>
-
 /* =====================================================
-   ZÁKLADNÍ NASTAVENÍ
+   SUPABASE
 ===================================================== */
+
+const SUPABASE_URL = "https://krlmpfuifkjqemhhtidp.supabase.co";
+const SUPABASE_KEY = "sb_publishable_3RBrTlTzK9OGSsDpSnxZUQ_PP3mTI3I";
+
+const supabaseClient = supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
 
 const PRICE_PER_SEAT = 780;
-
+const PAYMENT_IBAN = "CZ9455000000008212190017";
+const PAYMENT_ACCOUNT = "8212190017/5500";
 let selectedSeats = [];
-
 let activeTable = null;
 
+const tableGroups = document.querySelectorAll(".table-group");
+const selectedSeatsElement = document.getElementById("selectedSeats");
+const totalPriceElement = document.getElementById("totalPrice");
+const continueButton = document.getElementById("continueButton");
+const buttonNote = document.getElementById("buttonNote");
 
-const tableGroups =
-  document.querySelectorAll(".table-group");
+/* Obsazená místa načítáme ze Supabase */
+const occupiedSeats = new Set();
 
-const selectedSeatsElement =
-  document.getElementById("selectedSeats");
+async function loadOccupiedSeats(){
+  const { data, error } = await supabaseClient.rpc("get_occupied_seats");
 
-const totalPriceElement =
-  document.getElementById("totalPrice");
+  if(error){
+    console.error("Chyba při načítání obsazených míst:", error);
+    buttonNote.textContent = "Nepodařilo se načíst obsazená místa. Zkuste stránku obnovit.";
+    return false;
+  }
 
-const continueButton =
-  document.getElementById("continueButton");
+  occupiedSeats.clear();
 
-const buttonNote =
-  document.getElementById("buttonNote");
+  (data || []).forEach(item => {
+    occupiedSeats.add(
+      seatId(item.table_number, item.seat_number)
+    );
+  });
 
-
-/* =====================================================
-   OBSAZENÁ MÍSTA
-===================================================== */
-
-/*
-
-Sem můžeš později ručně napsat například:
-
-"4-1"
-"4-2"
-"10-5"
-
-první číslo = stůl
-druhé číslo = místo
-
-*/
-
-const occupiedSeats = new Set([
-
-  // "4-1",
-  // "4-2",
-  // "10-5"
-
-]);
-
-
-/* =====================================================
-   POMOCNÉ FUNKCE
-===================================================== */
-
-function seatId(table, seat){
-
-  return `${table}-${seat}`;
-
-}
-
-
-function isSelected(table, seat){
-
-  return selectedSeats.some(
-
-    item =>
-      item.id === seatId(table, seat)
-
+  /* Pokud někdo mezitím zabral místo, které má návštěvník rozkliknuté,
+     odebereme ho z jeho rozpracovaného výběru. */
+  selectedSeats = selectedSeats.filter(item =>
+    !occupiedSeats.has(seatId(item.table, item.seat))
   );
-
-}
-
-
-/* =====================================================
-   VÝBĚR MÍSTA
-===================================================== */
-
-function toggleSeat(table, seat){
-
-  const id =
-    seatId(table, seat);
-
-
-  if(
-    occupiedSeats.has(id)
-  ){
-
-    return;
-
-  }
-
-
-  if(
-    isSelected(table, seat)
-  ){
-
-    selectedSeats =
-      selectedSeats.filter(
-
-        item =>
-          item.id !== id
-
-      );
-
-  }
-
-  else{
-
-    selectedSeats.push({
-
-      id:id,
-
-      table:Number(table),
-
-      seat:Number(seat)
-
-    });
-
-  }
-
 
   syncAllSeats();
-
   updateSummary();
-
   updateDetailModal();
 
+  return true;
 }
 
+function seatId(table, seat){
+  return `${table}-${seat}`;
+}
 
-/* =====================================================
-   VYTVOŘENÍ ŽIDLÍ V PLÁNKU
-===================================================== */
+function isSelected(table, seat){
+  return selectedSeats.some(item => item.id === seatId(table, seat));
+}
+
+function toggleSeat(table, seat){
+  const id = seatId(table, seat);
+
+  if(occupiedSeats.has(id)) return;
+
+  if(isSelected(table, seat)){
+    selectedSeats = selectedSeats.filter(item => item.id !== id);
+  }else{
+    selectedSeats.push({
+      id,
+      table:Number(table),
+      seat:Number(seat)
+    });
+  }
+
+  syncAllSeats();
+  updateSummary();
+  updateDetailModal();
+}
 
 function createOverviewSeats(){
+  tableGroups.forEach(group => {
+    const tableNumber = group.dataset.table;
 
-  tableGroups.forEach(
+    for(let seatNumber=1; seatNumber<=8; seatNumber++){
+      const seat = document.createElement("button");
+      seat.type = "button";
+      seat.className = "seat";
 
-    group => {
+      const position = seatNumber <= 4 ? seatNumber : seatNumber - 4;
+      seat.classList.add(seatNumber <= 4 ? "side-a" : "side-b");
+      seat.classList.add("pos-" + position);
 
-      const tableNumber =
-        group.dataset.table;
+      seat.dataset.table = tableNumber;
+      seat.dataset.seat = seatNumber;
+      seat.setAttribute("aria-label", `Stůl ${tableNumber}, místo ${seatNumber}`);
+      seat.title = `Stůl ${tableNumber} – místo ${seatNumber}`;
 
+      seat.addEventListener("click", event => {
+        if(window.innerWidth <= 900) return;
+        event.stopPropagation();
+        toggleSeat(tableNumber, seatNumber);
+      });
 
-      for(
-        let seatNumber = 1;
-        seatNumber <= 8;
-        seatNumber++
-      ){
-
-        const seat =
-          document.createElement("button");
-
-
-        seat.type =
-          "button";
-
-
-        seat.className =
-          "seat";
-
-
-        const position =
-          seatNumber <= 4
-            ? seatNumber
-            : seatNumber - 4;
-
-
-        seat.classList.add(
-
-          seatNumber <= 4
-            ? "side-a"
-            : "side-b"
-
-        );
-
-
-        seat.classList.add(
-          "pos-" + position
-        );
-
-
-        seat.dataset.table =
-          tableNumber;
-
-        seat.dataset.seat =
-          seatNumber;
-
-
-        seat.setAttribute(
-
-          "aria-label",
-
-          `Stůl ${tableNumber}, místo ${seatNumber}`
-
-        );
-
-
-        seat.title =
-          `Stůl ${tableNumber} – místo ${seatNumber}`;
-
-
-        seat.addEventListener(
-
-          "click",
-
-          event => {
-
-            /*
-            Na mobilu nevybíráme
-            přímo malé židličky.
-            */
-
-            if(
-              window.innerWidth <= 900
-            ){
-
-              return;
-
-            }
-
-
-            event.stopPropagation();
-
-
-            toggleSeat(
-              tableNumber,
-              seatNumber
-            );
-
-          }
-
-        );
-
-
-        group.appendChild(
-          seat
-        );
-
-      }
-
-
-      /*
-      Na mobilu kliknutí na stůl
-      otevře jeho velký detail.
-      */
-
-      group.addEventListener(
-
-        "click",
-
-        () => {
-
-          if(
-            window.innerWidth <= 900
-          ){
-
-            openTableModal(
-              tableNumber
-            );
-
-          }
-
-        }
-
-      );
-
+      group.appendChild(seat);
     }
 
-  );
+    const tableElement = group.querySelector(".table");
 
+    if(tableElement){
+      tableElement.addEventListener("click", event => {
+        event.stopPropagation();
+        openTableModal(tableNumber);
+      });
+    }
+
+    group.addEventListener("click", event => {
+      if(window.innerWidth <= 900){
+        event.stopPropagation();
+        openTableModal(tableNumber);
+      }
+    });
+  });
 }
-
-
-/* =====================================================
-   SYNCHRONIZACE ŽIDLÍ
-===================================================== */
 
 function syncAllSeats(){
+  document.querySelectorAll(".seat").forEach(seat => {
+    const table = seat.dataset.table;
+    const number = seat.dataset.seat;
+    const id = seatId(table, number);
 
-  document
-    .querySelectorAll(".seat")
-    .forEach(
-
-      seat => {
-
-        const table =
-          seat.dataset.table;
-
-        const number =
-          seat.dataset.seat;
-
-        const id =
-          seatId(table, number);
-
-
-        seat.classList.toggle(
-
-          "selected",
-
-          isSelected(
-            table,
-            number
-          )
-
-        );
-
-
-        seat.classList.toggle(
-
-          "occupied",
-
-          occupiedSeats.has(id)
-
-        );
-
-
-        seat.disabled =
-          occupiedSeats.has(id);
-
-      }
-
-    );
-
+    seat.classList.toggle("selected", isSelected(table, number));
+    seat.classList.toggle("occupied", occupiedSeats.has(id));
+    seat.disabled = occupiedSeats.has(id);
+  });
 }
-
-
-/* =====================================================
-   SOUHRN
-===================================================== */
 
 function updateSummary(){
+  selectedSeats.sort((a,b) => a.table === b.table ? a.seat - b.seat : a.table - b.table);
 
-  selectedSeats.sort(
-
-    (a,b) =>
-
-      a.table === b.table
-
-        ? a.seat - b.seat
-
-        : a.table - b.table
-
-  );
-
-
-  if(
-    selectedSeats.length === 0
-  ){
-
-    selectedSeatsElement.textContent =
-      "Zatím nevybráno";
-
-    totalPriceElement.textContent =
-      "0";
-
-    continueButton.disabled =
-      true;
-
-    buttonNote.textContent =
-      "Nejprve vyberte alespoň jedno místo.";
-
+  if(selectedSeats.length === 0){
+    selectedSeatsElement.textContent = "Zatím nevybráno";
+    totalPriceElement.textContent = "0";
+    continueButton.disabled = true;
+    buttonNote.textContent = "Nejprve vyberte alespoň jedno místo.";
     return;
-
   }
 
+  selectedSeatsElement.innerHTML = selectedSeats
+    .map(item => `Stůl ${item.table} – místo ${item.seat}`)
+    .join("<br>");
 
-  selectedSeatsElement.innerHTML =
+  const total = selectedSeats.length * PRICE_PER_SEAT;
+  totalPriceElement.textContent = total.toLocaleString("cs-CZ");
+  continueButton.disabled = false;
 
-    selectedSeats
-      .map(
-
-        item =>
-          `Stůl ${item.table} – místo ${item.seat}`
-
-      )
-      .join("<br>");
-
-
-  const total =
-    selectedSeats.length *
-    PRICE_PER_SEAT;
-
-
-  totalPriceElement.textContent =
-
-    total.toLocaleString(
-      "cs-CZ"
-    );
-
-
-  continueButton.disabled =
-    false;
-
-
-  if(
-    selectedSeats.length === 1
-  ){
-
-    buttonNote.textContent =
-      "Vybráno 1 místo.";
-
+  if(selectedSeats.length === 1){
+    buttonNote.textContent = "Vybráno 1 místo.";
+  }else if(selectedSeats.length <= 4){
+    buttonNote.textContent = `Vybrána ${selectedSeats.length} místa.`;
+  }else{
+    buttonNote.textContent = `Vybráno ${selectedSeats.length} míst.`;
   }
 
-  else if(
-    selectedSeats.length <= 4
-  ){
-
-    buttonNote.textContent =
-      `Vybrána ${selectedSeats.length} místa.`;
-
-  }
-
-  else{
-
-    buttonNote.textContent =
-      `Vybráno ${selectedSeats.length} míst.`;
-
-  }
-
-
-  localStorage.setItem(
-
-    "plesSelectedSeats",
-
-    JSON.stringify(
-      selectedSeats
-    )
-
-  );
-
+  localStorage.setItem("plesSelectedSeats", JSON.stringify(selectedSeats));
 }
 
+/* DETAIL STOLU NA MOBILU */
+const tableModal = document.getElementById("tableModal");
+const tableModalTitle = document.getElementById("tableModalTitle");
+const detailTableNumber = document.getElementById("detailTableNumber");
+const detailSummary = document.getElementById("detailSummary");
+const detailSeats = document.querySelectorAll(".detail-seat");
+const selectWholeTableButton = document.getElementById("selectWholeTable");
 
-/* =====================================================
-   DETAIL STOLU NA MOBILU
-===================================================== */
-
-const tableModal =
-  document.getElementById(
-    "tableModal"
-  );
-
-const tableModalTitle =
-  document.getElementById(
-    "tableModalTitle"
-  );
-
-const detailTableNumber =
-  document.getElementById(
-    "detailTableNumber"
-  );
-
-const detailSummary =
-  document.getElementById(
-    "detailSummary"
-  );
-
-const detailSeats =
-  document.querySelectorAll(
-    ".detail-seat"
-  );
-
-
-function openTableModal(
-  tableNumber
-){
-
-  activeTable =
-    String(tableNumber);
-
-
-  tableModalTitle.textContent =
-    `Stůl ${tableNumber}`;
-
-
-  detailTableNumber.textContent =
-    tableNumber;
-
-
+function openTableModal(tableNumber){
+  activeTable = String(tableNumber);
+  tableModalTitle.textContent = `Stůl ${tableNumber}`;
+  detailTableNumber.textContent = tableNumber;
   updateDetailModal();
-
-
-  tableModal.classList.add(
-    "open"
-  );
-
-
-  tableModal.setAttribute(
-    "aria-hidden",
-    "false"
-  );
-
-
-  document.body.style.overflow =
-    "hidden";
-
+  tableModal.classList.add("open");
+  tableModal.setAttribute("aria-hidden","false");
+  document.body.style.overflow = "hidden";
 }
-
 
 function closeTableModal(){
-
-  tableModal.classList.remove(
-    "open"
-  );
-
-
-  tableModal.setAttribute(
-    "aria-hidden",
-    "true"
-  );
-
-
-  document.body.style.overflow =
-    "";
-
+  tableModal.classList.remove("open");
+  tableModal.setAttribute("aria-hidden","true");
+  document.body.style.overflow = "";
 }
-
-
-/* =====================================================
-   AKTUALIZACE DETAILU STOLU
-===================================================== */
 
 function updateDetailModal(){
+  if(!activeTable) return;
 
-  if(
-    !activeTable
-  ){
+  detailSeats.forEach(button => {
+    const seat = button.dataset.seat;
+    const id = seatId(activeTable, seat);
 
-    return;
+    button.classList.toggle("selected", isSelected(activeTable, seat));
+    button.classList.toggle("occupied", occupiedSeats.has(id));
+    button.disabled = occupiedSeats.has(id);
+  });
 
-  }
+  const selectedAtTable = selectedSeats
+    .filter(item => String(item.table) === String(activeTable))
+    .sort((a,b) => a.seat-b.seat);
 
-
-  detailSeats.forEach(
-
-    button => {
-
-      const seat =
-        button.dataset.seat;
-
-
-      const id =
-        seatId(
-          activeTable,
-          seat
-        );
-
-
-      button.classList.toggle(
-
-        "selected",
-
-        isSelected(
-          activeTable,
-          seat
-        )
-
-      );
-
-
-      button.classList.toggle(
-
-        "occupied",
-
-        occupiedSeats.has(id)
-
-      );
-
-
-      button.disabled =
-        occupiedSeats.has(id);
-
-    }
-
-  );
-
-
-  const selectedAtTable =
-
-    selectedSeats
-      .filter(
-
-        item =>
-          String(item.table) ===
-          String(activeTable)
-
-      )
-      .sort(
-
-        (a,b) =>
-          a.seat - b.seat
-
-      );
-
-
-  if(
-    selectedAtTable.length === 0
-  ){
-
-    detailSummary.textContent =
-      "U tohoto stolu zatím nemáte vybrané žádné místo.";
-
-  }
-
-  else{
-
+  if(selectedAtTable.length === 0){
+    detailSummary.textContent = "U tohoto stolu zatím nemáte vybrané žádné místo.";
+  }else{
     detailSummary.innerHTML =
-
-      `Vybraná místa u stolu ${activeTable}: ` +
-
-      `<strong>${
-        selectedAtTable
-          .map(x => x.seat)
-          .join(", ")
-      }</strong>`
-
-      +
-
-      `<br>`
-
-      +
-
-      `Cena: <strong>${
-        (
-          selectedAtTable.length *
-          PRICE_PER_SEAT
-        )
-        .toLocaleString("cs-CZ")
-      } Kč</strong>`;
-
+      `Vybraná místa u stolu ${activeTable}: <strong>${selectedAtTable.map(x => x.seat).join(", ")}</strong><br>` +
+      `Cena: <strong>${(selectedAtTable.length * PRICE_PER_SEAT).toLocaleString("cs-CZ")} Kč</strong>`;
   }
 
+  const occupiedAtTable = Array.from({length:8}, (_,i) => i + 1)
+    .filter(seat => occupiedSeats.has(seatId(activeTable, seat)));
+
+  const allEightSelected = Array.from({length:8}, (_,i) => i + 1)
+    .every(seat => isSelected(activeTable, seat));
+
+  if(occupiedAtTable.length > 0){
+    selectWholeTableButton.disabled = true;
+    selectWholeTableButton.textContent = "CELÝ STŮL NENÍ VOLNÝ";
+  }else if(allEightSelected){
+    selectWholeTableButton.disabled = false;
+    selectWholeTableButton.textContent = "ZRUŠIT VÝBĚR CELÉHO STOLU";
+  }else{
+    selectWholeTableButton.disabled = false;
+    selectWholeTableButton.textContent = "VYBRAT CELÝ STŮL";
+  }
 }
 
-
-/* =====================================================
-   KLIKÁNÍ NA VELKÁ MÍSTA
-===================================================== */
-
-detailSeats.forEach(
-
-  button => {
-
-    button.addEventListener(
-
-      "click",
-
-      () => {
-
-        if(
-          !activeTable
-        ){
-
-          return;
-
-        }
+detailSeats.forEach(button => {
+  button.addEventListener("click", () => {
+    if(!activeTable) return;
+    toggleSeat(activeTable, button.dataset.seat);
+  });
+});
 
 
-        toggleSeat(
+selectWholeTableButton.addEventListener("click", () => {
+  if(!activeTable) return;
 
-          activeTable,
+  const seats = Array.from({length:8}, (_,i) => i + 1);
+  const occupiedAtTable = seats.some(seat =>
+    occupiedSeats.has(seatId(activeTable, seat))
+  );
 
-          button.dataset.seat
+  if(occupiedAtTable){
+    return;
+  }
 
-        );
+  const allSelected = seats.every(seat =>
+    isSelected(activeTable, seat)
+  );
 
-      }
-
+  if(allSelected){
+    selectedSeats = selectedSeats.filter(item =>
+      String(item.table) !== String(activeTable)
     );
-
+  }else{
+    seats.forEach(seat => {
+      if(!isSelected(activeTable, seat)){
+        selectedSeats.push({
+          id: seatId(activeTable, seat),
+          table: Number(activeTable),
+          seat: Number(seat)
+        });
+      }
+    });
   }
 
-);
+  syncAllSeats();
+  updateSummary();
+  updateDetailModal();
+});
 
+document.getElementById("closeTableModal").addEventListener("click", closeTableModal);
+document.getElementById("detailDone").addEventListener("click", closeTableModal);
 
-/* =====================================================
-   ZAVŘENÍ DETAILU
-===================================================== */
+tableModal.addEventListener("click", event => {
+  if(event.target === tableModal) closeTableModal();
+});
 
-document
-  .getElementById(
-    "closeTableModal"
-  )
-  .addEventListener(
-
-    "click",
-
-    closeTableModal
-
-  );
-
-
-document
-  .getElementById(
-    "detailDone"
-  )
-  .addEventListener(
-
-    "click",
-
-    closeTableModal
-
-  );
-
-
-tableModal.addEventListener(
-
-  "click",
-
-  event => {
-
-    if(
-      event.target === tableModal
-    ){
-
-      closeTableModal();
-
-    }
-
-  }
-
-);
-
-
-/* =====================================================
-   FORMULÁŘ REZERVACE
-===================================================== */
-
-const formModal =
-  document.getElementById(
-    "formModal"
-  );
-
-const formSummary =
-  document.getElementById(
-    "formSummary"
-  );
-
-const reservationForm =
-  document.getElementById(
-    "reservationForm"
-  );
-
-const successMessage =
-  document.getElementById(
-    "successMessage"
-  );
-
+/* FORMULÁŘ */
+const formModal = document.getElementById("formModal");
+const formSummary = document.getElementById("formSummary");
+const reservationForm = document.getElementById("reservationForm");
+const successMessage = document.getElementById("successMessage");
+const paymentBox = document.getElementById("paymentBox");
+const paymentAmount = document.getElementById("paymentAmount");
+const paymentQr = document.getElementById("paymentQr");
+const paymentVs = document.getElementById("paymentVs");
 
 function openFormModal(){
+  if(selectedSeats.length === 0) return;
 
-  if(
-    selectedSeats.length === 0
-  ){
-
-    return;
-
-  }
-
-
-  const total =
-
-    selectedSeats.length *
-    PRICE_PER_SEAT;
-
-
-  const places =
-
-    selectedSeats
-      .map(
-
-        item =>
-          `Stůl ${item.table} / místo ${item.seat}`
-
-      )
-      .join("<br>");
-
+  const total = selectedSeats.length * PRICE_PER_SEAT;
+  const places = selectedSeats
+    .map(item => `Stůl ${item.table} / místo ${item.seat}`)
+    .join("<br>");
 
   formSummary.innerHTML =
+    `<strong>Vybraná místa:</strong><br>${places}<br><br>` +
+    `<strong>Celkem: ${total.toLocaleString("cs-CZ")} Kč</strong>`;
 
-    `<strong>Vybraná místa:</strong><br>`
+  successMessage.style.display = "none";
+  successMessage.textContent = "";
+  paymentBox.style.display = "none";
+  paymentQr.innerHTML = "";
 
-    +
-
-    places
-
-    +
-
-    `<br><br>`
-
-    +
-
-    `<strong>Celkem: ${
-      total.toLocaleString("cs-CZ")
-    } Kč</strong>`;
-
-
-  successMessage.style.display =
-    "none";
-
-
-  successMessage.textContent =
-    "";
-
-
-  formModal.classList.add(
-    "open"
-  );
-
-
-  formModal.setAttribute(
-    "aria-hidden",
-    "false"
-  );
-
-
-  document.body.style.overflow =
-    "hidden";
-
+  formModal.classList.add("open");
+  formModal.setAttribute("aria-hidden","false");
+  document.body.style.overflow = "hidden";
 }
-
 
 function closeFormModal(){
-
-  formModal.classList.remove(
-    "open"
-  );
-
-
-  formModal.setAttribute(
-    "aria-hidden",
-    "true"
-  );
-
-
-  document.body.style.overflow =
-    "";
-
+  formModal.classList.remove("open");
+  formModal.setAttribute("aria-hidden","true");
+  document.body.style.overflow = "";
 }
 
+continueButton.addEventListener("click", openFormModal);
+document.getElementById("closeFormModal").addEventListener("click", closeFormModal);
 
-continueButton.addEventListener(
+formModal.addEventListener("click", event => {
+  if(event.target === formModal) closeFormModal();
+});
 
-  "click",
+reservationForm.addEventListener("submit", async event => {
+  event.preventDefault();
 
-  openFormModal
+  if(selectedSeats.length === 0){
+    successMessage.style.display = "block";
+    successMessage.style.background = "#fdecea";
+    successMessage.style.color = "#8a241e";
+    successMessage.textContent = "Nemáte vybrané žádné místo.";
+    return;
+  }
 
-);
+  const submitButton = reservationForm.querySelector('button[type="submit"]');
+  const originalButtonText = submitButton.textContent;
 
+  submitButton.disabled = true;
+  submitButton.textContent = "UKLÁDÁM REZERVACI...";
 
-document
-  .getElementById(
-    "closeFormModal"
-  )
-  .addEventListener(
+  successMessage.style.display = "none";
+  successMessage.textContent = "";
 
-    "click",
+  /* Nejprve znovu načteme obsazená místa. */
+  const loaded = await loadOccupiedSeats();
 
-    closeFormModal
+  if(!loaded){
+    submitButton.disabled = false;
+    submitButton.textContent = originalButtonText;
+    successMessage.style.display = "block";
+    successMessage.style.background = "#fdecea";
+    successMessage.style.color = "#8a241e";
+    successMessage.textContent = "Rezervaci teď nelze ověřit. Zkontrolujte připojení a zkuste to znovu.";
+    return;
+  }
 
-  );
+  if(selectedSeats.length === 0){
+    submitButton.disabled = false;
+    submitButton.textContent = originalButtonText;
+    successMessage.style.display = "block";
+    successMessage.style.background = "#fdecea";
+    successMessage.style.color = "#8a241e";
+    successMessage.textContent = "Vybraná místa mezitím rezervoval někdo jiný. Zavřete okno a vyberte prosím jiná místa.";
+    return;
+  }
 
+  const formData = new FormData(reservationForm);
 
-formModal.addEventListener(
+  const reservationData = {
+    firstName: String(formData.get("firstName") || "").trim(),
+    lastName: String(formData.get("lastName") || "").trim(),
+    email: String(formData.get("email") || "").trim(),
+    phone: String(formData.get("phone") || "").trim(),
+    seats: selectedSeats.map(item => ({
+      table: item.table,
+      seat: item.seat
+    }))
+  };
 
-  "click",
-
-  event => {
-
-    if(
-      event.target === formModal
-    ){
-
-      closeFormModal();
-
+  const { data, error } = await supabaseClient.rpc(
+    "create_reservation",
+    {
+      p_first_name: reservationData.firstName,
+      p_last_name: reservationData.lastName,
+      p_email: reservationData.email,
+      p_phone: reservationData.phone,
+      p_seats: reservationData.seats
     }
+  );
 
-  }
+  if(error){
+    console.error("Chyba při rezervaci:", error);
 
-);
+    await loadOccupiedSeats();
 
+    submitButton.disabled = false;
+    submitButton.textContent = originalButtonText;
 
-/* =====================================================
-   ODESLÁNÍ FORMULÁŘE
-===================================================== */
-
-reservationForm.addEventListener(
-
-  "submit",
-
-  event => {
-
-    event.preventDefault();
-
-
-    const formData =
-      new FormData(
-        reservationForm
-      );
-
-
-    const reservationData = {
-
-      firstName:
-        formData.get(
-          "firstName"
-        ),
-
-      lastName:
-        formData.get(
-          "lastName"
-        ),
-
-      email:
-        formData.get(
-          "email"
-        ),
-
-      phone:
-        formData.get(
-          "phone"
-        ),
-
-      seats:
-        selectedSeats,
-
-      pricePerSeat:
-        PRICE_PER_SEAT,
-
-      totalPrice:
-        selectedSeats.length *
-        PRICE_PER_SEAT,
-
-      createdAt:
-        new Date()
-          .toISOString()
-
-    };
-
-
-    localStorage.setItem(
-
-      "plesReservation",
-
-      JSON.stringify(
-        reservationData
-      )
-
-    );
-
-
-    successMessage.style.display =
-      "block";
-
-
+    successMessage.style.display = "block";
+    successMessage.style.background = "#fdecea";
+    successMessage.style.color = "#8a241e";
     successMessage.innerHTML =
-
-      `Rezervace byla připravena pro ` +
-
-      `<strong>${
-        reservationData.firstName
-      } ${
-        reservationData.lastName
-      }</strong>.`
-
-      +
-
-      `<br>`
-
-      +
-
-      `Vybráno míst: ${
-        reservationData.seats.length
-      }, celkem ${
-        reservationData.totalPrice
-          .toLocaleString("cs-CZ")
-      } Kč.`;
-
-  }
-
-);
-
-
-/* =====================================================
-   OBNOVENÍ ROZPRACOVANÉHO VÝBĚRU
-===================================================== */
-
-try{
-
-  const saved =
-
-    JSON.parse(
-
-      localStorage.getItem(
-        "plesSelectedSeats"
-      )
-
-      ||
-
-      "[]"
-
-    );
-
-
-  if(
-    Array.isArray(saved)
-  ){
-
-    selectedSeats =
-
-      saved
-        .filter(
-
-          item =>
-
-            item
-
-            &&
-
-            Number.isFinite(
-              Number(item.table)
-            )
-
-            &&
-
-            Number.isFinite(
-              Number(item.seat)
-            )
-
-            &&
-
-            !occupiedSeats.has(
-
-              seatId(
-                item.table,
-                item.seat
-              )
-
-            )
-
-        )
-        .map(
-
-          item => ({
-
-            id:
-              seatId(
-                item.table,
-                item.seat
-              ),
-
-            table:
-              Number(
-                item.table
-              ),
-
-            seat:
-              Number(
-                item.seat
-              )
-
-          })
-
-        );
-
-  }
-
-}
-catch(e){
-
-  selectedSeats = [];
-
-}
-
-
-/* =====================================================
-   AUTOMATICKÉ ZMENŠENÍ SÁLU NA MOBIL
-===================================================== */
-
-function resizeHallForMobile(){
-
-  const hall =
-    document.querySelector(
-      ".hall"
-    );
-
-
-  const hallScroll =
-    document.querySelector(
-      ".hall-scroll"
-    );
-
-
-  if(
-    !hall ||
-    !hallScroll
-  ){
+      "Rezervaci se nepodařilo uložit. " +
+      "Některé z vybraných míst mohl právě rezervovat jiný návštěvník. " +
+      "Zavřete okno, zkontrolujte červeně označená místa a zkuste rezervaci znovu.";
 
     return;
-
   }
 
+  const reservationNumber = data;
+  const reservedCount = selectedSeats.length;
+  const totalPrice = reservedCount * PRICE_PER_SEAT;
 
-  const hallWidth =
-    1200;
+  // ODESLÁNÍ POTVRZOVACÍHO E-MAILU
+  // Chyba e-mailu nezruší již vytvořenou rezervaci.
+  try{
+    const { error: emailError } = await supabaseClient.functions.invoke(
+      "send-reservation-email",
+      {
+        body: {
+          email: reservationData.email,
+          first_name: reservationData.firstName,
+          last_name: reservationData.lastName,
+          reservation_id: reservationNumber,
+          seats: reservationData.seats,
+          total_price: totalPrice
+        }
+      }
+    );
 
-
-  const hallHeight =
-    1050;
-
-
-  if(
-    window.innerWidth <= 900
-  ){
-
-    const availableWidth =
-
-      Math.max(
-
-        280,
-
-        window.innerWidth - 16
-
-      );
-
-
-    const scale =
-
-      Math.min(
-
-        1,
-
-        availableWidth /
-        hallWidth
-
-      );
-
-
-    hall.style.transform =
-
-      `scale(${scale})`;
-
-
-    hall.style.transformOrigin =
-
-      "top left";
-
-
-    hallScroll.style.width =
-
-      `${hallWidth * scale}px`;
-
-
-    hallScroll.style.height =
-
-      `${hallHeight * scale}px`;
-
+    if(emailError){
+      console.error("Potvrzovací e-mail se nepodařilo odeslat:", emailError);
+    }else{
+      console.log("Potvrzovací e-mail byl odeslán.");
+    }
+  }catch(emailException){
+    console.error("Chyba při odesílání potvrzovacího e-mailu:", emailException);
   }
 
-  else{
+  localStorage.removeItem("plesSelectedSeats");
 
-    hall.style.transform =
-      "";
+  selectedSeats = [];
+  updateSummary();
 
+  await loadOccupiedSeats();
 
-    hall.style.transformOrigin =
-      "";
+  reservationForm.reset();
 
+  submitButton.disabled = false;
+  submitButton.textContent = originalButtonText;
 
-    hallScroll.style.width =
-      "";
+  successMessage.style.display = "block";
+  successMessage.style.background = "#eef8ec";
+  successMessage.style.color = "#2d5d29";
+  successMessage.innerHTML =
+    `<strong>Rezervace byla úspěšně uložena.</strong><br>` +
+    `Počet míst: ${reservedCount}<br>` +
+    `Celková cena: ${totalPrice.toLocaleString("cs-CZ")} Kč<br>` +
+    `Místa jsou nyní rezervovaná po dobu 5 dní.`;
 
+  const variableSymbol = String(reservationNumber);
+  const amountForQr = Number(totalPrice).toFixed(2);
+  const spd =
+    `SPD*1.0*ACC:${PAYMENT_IBAN}` +
+    `*AM:${amountForQr}` +
+    `*CC:CZK` +
+    `*X-VS:${variableSymbol}` +
+    `*MSG:Vstupenky HC BULDOGS`;
 
-    hallScroll.style.height =
-      "";
+  paymentAmount.textContent = `${totalPrice.toLocaleString("cs-CZ")} Kč`;
+  paymentVs.innerHTML = `<strong>Variabilní symbol:</strong> ${variableSymbol}`;
+  paymentQr.innerHTML = "";
 
+  new QRCode(paymentQr, {
+    text: spd,
+    width: 210,
+    height: 210,
+    correctLevel: QRCode.CorrectLevel.M
+  });
+
+  paymentBox.style.display = "block";
+});
+
+/* OBNOVENÍ ROZPRACOVANÉHO VÝBĚRU */
+try{
+  const saved = JSON.parse(localStorage.getItem("plesSelectedSeats") || "[]");
+  if(Array.isArray(saved)){
+    selectedSeats = saved.filter(item =>
+      item &&
+      Number.isFinite(Number(item.table)) &&
+      Number.isFinite(Number(item.seat)) &&
+      !occupiedSeats.has(seatId(item.table,item.seat))
+    ).map(item => ({
+      id:seatId(item.table,item.seat),
+      table:Number(item.table),
+      seat:Number(item.seat)
+    }));
   }
-
+}catch(e){
+  selectedSeats = [];
 }
 
+/* AUTOMATICKÉ ZMENŠENÍ CELÉHO SÁLU NA MOBIL */
+function resizeHallForMobile(){
+  const hall = document.querySelector(".hall");
+  const hallScroll = document.querySelector(".hall-scroll");
+  if(!hall || !hallScroll) return;
 
-/* =====================================================
-   SPUŠTĚNÍ
-===================================================== */
+  const hallWidth = 1200;
+  const hallHeight = 1050;
 
-createOverviewSeats();
+  if(window.innerWidth <= 900){
+    const availableWidth = Math.max(280, window.innerWidth - 16);
+    const scale = Math.min(1, availableWidth / hallWidth);
 
-syncAllSeats();
-
-updateSummary();
-
-resizeHallForMobile();
-
-
-window.addEventListener(
-
-  "resize",
-
-  resizeHallForMobile
-
-);
-
-
-/* ESC zavře otevřená okna */
-
-document.addEventListener(
-
-  "keydown",
-
-  event => {
-
-    if(
-      event.key === "Escape"
-    ){
-
-      if(
-        tableModal.classList.contains(
-          "open"
-        )
-      ){
-
-        closeTableModal();
-
-      }
-
-
-      if(
-        formModal.classList.contains(
-          "open"
-        )
-      ){
-
-        closeFormModal();
-
-      }
-
-    }
-
+    hall.style.transform = `scale(${scale})`;
+    hall.style.transformOrigin = "top left";
+    hallScroll.style.width = `${hallWidth * scale}px`;
+    hallScroll.style.height = `${hallHeight * scale}px`;
+  }else{
+    hall.style.transform = "";
+    hall.style.transformOrigin = "";
+    hallScroll.style.width = "";
+    hallScroll.style.height = "";
   }
+}
 
-);
+async function initializeReservationPage(){
+  createOverviewSeats();
+  syncAllSeats();
+  updateSummary();
+  resizeHallForMobile();
 
+  await loadOccupiedSeats();
+
+  /* Každých 20 sekund zkontrolujeme, zda nepřibyla nová rezervace. */
+  setInterval(loadOccupiedSeats, 20000);
+}
+
+initializeReservationPage();
+
+window.addEventListener("resize", resizeHallForMobile);
+
+/* ESC zavře otevřené okno */
+document.addEventListener("keydown", event => {
+  if(event.key === "Escape"){
+    if(tableModal.classList.contains("open")) closeTableModal();
+    if(formModal.classList.contains("open")) closeFormModal();
+  }
+});
 </script>
-
 </body>
 </html>
