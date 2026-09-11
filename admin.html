@@ -1,1 +1,542 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Administrace rezervací | HC BULDOGS</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:linear-gradient(180deg,#f5f0e8 0%,#eee5d8 100%);
+  color:#2d261f;
+}
+button,input{font:inherit}
+.header{
+  background:#182433;
+  color:#fff;
+  padding:20px;
+  box-shadow:0 4px 14px rgba(0,0,0,.18);
+}
+.header-inner{
+  max-width:1200px;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+}
+.header h1{margin:0;font-size:26px}
+.header-actions{display:flex;gap:10px;align-items:center}
+.small-btn{
+  border:0;
+  border-radius:9px;
+  padding:10px 14px;
+  cursor:pointer;
+  font-weight:700;
+}
+.logout{background:#fff;color:#182433}
+.page{max-width:1200px;margin:auto;padding:28px 18px 50px}
+.card{
+  background:#fff;
+  border-radius:18px;
+  padding:24px;
+  box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+.login-card{
+  max-width:460px;
+  margin:50px auto;
+}
+.login-card h2{margin-top:0}
+.field{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+.field label{font-weight:700}
+.field input{
+  border:1px solid #c8bcae;
+  border-radius:10px;
+  padding:13px 14px;
+  outline:none;
+}
+.field input:focus{
+  border-color:#b27d27;
+  box-shadow:0 0 0 3px rgba(178,125,39,.12);
+}
+.primary{
+  width:100%;
+  border:0;
+  border-radius:11px;
+  padding:14px;
+  background:linear-gradient(180deg,#e8b94f,#ce8c24);
+  color:#211708;
+  font-weight:800;
+  cursor:pointer;
+}
+.primary:disabled{opacity:.6;cursor:not-allowed}
+.message{
+  display:none;
+  margin-top:14px;
+  padding:12px 14px;
+  border-radius:10px;
+  font-weight:700;
+}
+.message.error{display:block;background:#fdecea;color:#8a241e}
+.message.ok{display:block;background:#eef8ec;color:#2d5d29}
+
+.toolbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:14px;
+  margin-bottom:18px;
+  flex-wrap:wrap;
+}
+.toolbar-left{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.toolbar input{
+  min-width:260px;
+  border:1px solid #c8bcae;
+  border-radius:10px;
+  padding:11px 12px;
+}
+.refresh{
+  border:0;
+  border-radius:10px;
+  padding:11px 14px;
+  background:#182433;
+  color:#fff;
+  cursor:pointer;
+  font-weight:700;
+}
+.summary{
+  color:#6d645b;
+  font-weight:700;
+}
+.table-wrap{
+  overflow:auto;
+  border-radius:14px;
+  border:1px solid #e3d9cc;
+}
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:1050px;
+  background:#fff;
+}
+th,td{
+  padding:13px 12px;
+  border-bottom:1px solid #eee6dd;
+  text-align:left;
+  vertical-align:top;
+}
+th{
+  background:#f4eee6;
+  font-size:13px;
+  text-transform:uppercase;
+  letter-spacing:.3px;
+  position:sticky;
+  top:0;
+}
+tr:last-child td{border-bottom:0}
+.status{
+  display:inline-block;
+  padding:6px 9px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:800;
+}
+.status.reserved{background:#fff3cd;color:#7a5a00}
+.status.paid{background:#dff4df;color:#236b2b}
+.status.other{background:#ececec;color:#555}
+.pay-btn{
+  border:0;
+  border-radius:9px;
+  padding:9px 11px;
+  background:#2f7d32;
+  color:#fff;
+  font-weight:800;
+  cursor:pointer;
+}
+.pay-btn:disabled{background:#b9b9b9;cursor:not-allowed}
+.cancel-btn{
+  border:0;
+  border-radius:9px;
+  padding:9px 11px;
+  background:#b3362d;
+  color:#fff;
+  font-weight:800;
+  cursor:pointer;
+  margin-top:7px;
+}
+.cancel-btn:disabled{background:#b9b9b9;cursor:not-allowed}
+.muted{color:#7f756b;font-size:13px}
+.hidden{display:none!important}
+@media(max-width:700px){
+  .header-inner{align-items:flex-start;flex-direction:column}
+  .header h1{font-size:21px}
+  .page{padding:18px 10px 35px}
+  .card{padding:16px;border-radius:14px}
+  .toolbar input{min-width:100%;width:100%}
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <h1>Administrace rezervací – HC BULDOGS</h1>
+    <div class="header-actions">
+      <span id="adminEmail" class="muted" style="color:#d7dde4"></span>
+      <button id="logoutButton" class="small-btn logout hidden">Odhlásit</button>
+    </div>
+  </div>
+</header>
+
+<main class="page">
+
+  <section id="loginSection" class="card login-card">
+    <h2>Přihlášení správce</h2>
+    <p class="muted">Přihlaste se e-mailem a heslem vytvořeným v Supabase.</p>
+
+    <form id="loginForm">
+      <div class="field">
+        <label for="email">E-mail</label>
+        <input id="email" type="email" value="barboratillova27@gmail.com" required autocomplete="username">
+      </div>
+
+      <div class="field">
+        <label for="password">Heslo</label>
+        <input id="password" type="password" required autocomplete="current-password">
+      </div>
+
+      <button id="loginButton" class="primary" type="submit">PŘIHLÁSIT</button>
+      <div id="loginMessage" class="message"></div>
+    </form>
+  </section>
+
+  <section id="adminSection" class="card hidden">
+    <div class="toolbar">
+      <div class="toolbar-left">
+        <input id="searchInput" type="search" placeholder="Hledat jméno, e-mail, telefon, místo…">
+        <button id="refreshButton" class="refresh">Obnovit</button>
+      </div>
+      <div id="reservationSummary" class="summary"></div>
+    </div>
+
+    <div id="adminMessage" class="message"></div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Jméno</th>
+            <th>Kontakt</th>
+            <th>Místa</th>
+            <th>Počet</th>
+            <th>Cena</th>
+            <th>Vytvořeno</th>
+            <th>Platnost do</th>
+            <th>Stav</th>
+            <th>Akce</th>
+          </tr>
+        </thead>
+        <tbody id="reservationRows"></tbody>
+      </table>
+    </div>
+  </section>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL = "https://krlmpfuifkjqemhhtidp.supabase.co";
+const SUPABASE_KEY = "sb_publishable_3RBrTlTzK9OGSsDpSnxZUQ_PP3mTI3I";
+const ADMIN_EMAIL = "barboratillova27@gmail.com";
+
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+const loginSection = document.getElementById("loginSection");
+const adminSection = document.getElementById("adminSection");
+const loginForm = document.getElementById("loginForm");
+const loginButton = document.getElementById("loginButton");
+const loginMessage = document.getElementById("loginMessage");
+const logoutButton = document.getElementById("logoutButton");
+const adminEmail = document.getElementById("adminEmail");
+const reservationRows = document.getElementById("reservationRows");
+const refreshButton = document.getElementById("refreshButton");
+const adminMessage = document.getElementById("adminMessage");
+const reservationSummary = document.getElementById("reservationSummary");
+const searchInput = document.getElementById("searchInput");
+
+let reservations = [];
+
+function showMessage(el, text, type="error"){
+  el.textContent = text;
+  el.className = "message " + type;
+}
+
+function clearMessage(el){
+  el.textContent = "";
+  el.className = "message";
+}
+
+function formatDate(value){
+  if(!value) return "—";
+  const d = new Date(value);
+  return d.toLocaleString("cs-CZ", {
+    day:"2-digit",
+    month:"2-digit",
+    year:"numeric",
+    hour:"2-digit",
+    minute:"2-digit"
+  });
+}
+
+function formatMoney(value){
+  return Number(value || 0).toLocaleString("cs-CZ") + " Kč";
+}
+
+function statusLabel(status){
+  if(status === "paid"){
+    return '<span class="status paid">ZAPLACENO</span>';
+  }
+  if(status === "reserved"){
+    return '<span class="status reserved">ČEKÁ NA PLATBU</span>';
+  }
+  if(status === "cancelled"){
+    return '<span class="status other">STORNOVÁNO</span>';
+  }
+  return `<span class="status other">${String(status || "—").toUpperCase()}</span>`;
+}
+
+function escapeHtml(value){
+  return String(value ?? "")
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
+
+function renderReservations(){
+  const query = searchInput.value.trim().toLowerCase();
+
+  const filtered = reservations.filter(r => {
+    if(!query) return true;
+    const haystack = [
+      r.id,
+      r.first_name,
+      r.last_name,
+      r.email,
+      r.phone,
+      r.seats,
+      r.status
+    ].join(" ").toLowerCase();
+
+    return haystack.includes(query);
+  });
+
+  const paidCount = reservations.filter(r => r.status === "paid").length;
+  const reservedCount = reservations.filter(r => r.status === "reserved").length;
+
+  reservationSummary.textContent =
+    `Celkem ${reservations.length} rezervací • čeká ${reservedCount} • zaplaceno ${paidCount}`;
+
+  if(filtered.length === 0){
+    reservationRows.innerHTML =
+      '<tr><td colspan="10" style="text-align:center;padding:28px">Žádné rezervace nenalezeny.</td></tr>';
+    return;
+  }
+
+  reservationRows.innerHTML = filtered.map(r => {
+    const contact =
+      `${escapeHtml(r.email || "—")}<br>` +
+      `<span class="muted">${escapeHtml(r.phone || "Telefon neuveden")}</span>`;
+
+    let action = "";
+
+    if(r.status === "paid"){
+      action =
+        '<button class="pay-btn" disabled>ZAPLACENO</button>' +
+        `<br><button class="cancel-btn" data-cancel-id="${r.id}">STORNOVAT REZERVACI</button>`;
+    }else if(r.status === "cancelled"){
+      action = '<button class="cancel-btn" disabled>STORNOVÁNO</button>';
+    }else{
+      action =
+        `<button class="pay-btn" data-id="${r.id}">POTVRDIT PLATBU</button>` +
+        `<br><button class="cancel-btn" data-cancel-id="${r.id}">STORNOVAT REZERVACI</button>`;
+    }
+
+    return `
+      <tr>
+        <td>${r.id}</td>
+        <td><strong>${escapeHtml(r.first_name)} ${escapeHtml(r.last_name)}</strong></td>
+        <td>${contact}</td>
+        <td>${escapeHtml(r.seats || "—")}</td>
+        <td>${r.seat_count ?? 0}</td>
+        <td><strong>${formatMoney(r.total_price)}</strong></td>
+        <td>${formatDate(r.created_at)}</td>
+        <td>${formatDate(r.expires_at)}</td>
+        <td>${statusLabel(r.status)}</td>
+        <td>${action}</td>
+      </tr>
+    `;
+  }).join("");
+
+  document.querySelectorAll(".pay-btn[data-id]").forEach(button => {
+    button.addEventListener("click", () => markPaid(Number(button.dataset.id), button));
+  });
+
+  document.querySelectorAll(".cancel-btn[data-cancel-id]").forEach(button => {
+    button.addEventListener("click", () => cancelReservation(Number(button.dataset.cancelId), button));
+  });
+}
+
+async function loadReservations(){
+  clearMessage(adminMessage);
+  refreshButton.disabled = true;
+  refreshButton.textContent = "Načítám…";
+
+  const { data, error } = await supabaseClient.rpc("get_admin_reservations");
+
+  refreshButton.disabled = false;
+  refreshButton.textContent = "Obnovit";
+
+  if(error){
+    console.error(error);
+    showMessage(adminMessage, "Rezervace se nepodařilo načíst. Zkuste se odhlásit a znovu přihlásit.");
+    return;
+  }
+
+  reservations = data || [];
+  renderReservations();
+}
+
+async function markPaid(id, button){
+  const reservation = reservations.find(r => Number(r.id) === Number(id));
+  const name = reservation ? `${reservation.first_name} ${reservation.last_name}` : `ID ${id}`;
+
+  if(!confirm(`Potvrdit přijatou platbu pro rezervaci ${name}?`)){
+    return;
+  }
+
+  const originalText = button.textContent;
+  button.disabled = true;
+  button.textContent = "UKLÁDÁM…";
+
+  const { error } = await supabaseClient.rpc("mark_reservation_paid", {
+    p_reservation_id: id
+  });
+
+  if(error){
+    console.error(error);
+    button.disabled = false;
+    button.textContent = originalText;
+    showMessage(adminMessage, "Platbu se nepodařilo potvrdit.");
+    return;
+  }
+
+  showMessage(adminMessage, "Platba byla úspěšně potvrzena.", "ok");
+  await loadReservations();
+}
+
+
+async function cancelReservation(id, button){
+  const reservation = reservations.find(r => Number(r.id) === Number(id));
+  const name = reservation ? `${reservation.first_name} ${reservation.last_name}` : `ID ${id}`;
+
+  if(!confirm(`Opravdu chcete stornovat rezervaci ${name}? Místa se tím uvolní pro další zájemce.`)){
+    return;
+  }
+
+  const originalText = button.textContent;
+  button.disabled = true;
+  button.textContent = "STORNUJI…";
+
+  const { error } = await supabaseClient.rpc("cancel_reservation", {
+    p_reservation_id: id
+  });
+
+  if(error){
+    console.error(error);
+    button.disabled = false;
+    button.textContent = originalText;
+    showMessage(adminMessage, "Rezervaci se nepodařilo stornovat.");
+    return;
+  }
+
+  showMessage(adminMessage, "Rezervace byla stornována a její místa se uvolnila.", "ok");
+  await loadReservations();
+}
+
+async function showAdmin(session){
+  const email = session?.user?.email || "";
+
+  if(email.toLowerCase() !== ADMIN_EMAIL.toLowerCase()){
+    await supabaseClient.auth.signOut();
+    loginSection.classList.remove("hidden");
+    adminSection.classList.add("hidden");
+    logoutButton.classList.add("hidden");
+    adminEmail.textContent = "";
+    showMessage(loginMessage, "Tento účet nemá oprávnění k administraci.");
+    return;
+  }
+
+  loginSection.classList.add("hidden");
+  adminSection.classList.remove("hidden");
+  logoutButton.classList.remove("hidden");
+  adminEmail.textContent = email;
+  await loadReservations();
+}
+
+loginForm.addEventListener("submit", async event => {
+  event.preventDefault();
+  clearMessage(loginMessage);
+
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value;
+
+  loginButton.disabled = true;
+  loginButton.textContent = "PŘIHLAŠUJI…";
+
+  const { data, error } = await supabaseClient.auth.signInWithPassword({
+    email,
+    password
+  });
+
+  loginButton.disabled = false;
+  loginButton.textContent = "PŘIHLÁSIT";
+
+  if(error){
+    console.error(error);
+    showMessage(loginMessage, "Přihlášení se nepodařilo. Zkontrolujte e-mail a heslo.");
+    return;
+  }
+
+  await showAdmin(data.session);
+});
+
+logoutButton.addEventListener("click", async () => {
+  await supabaseClient.auth.signOut();
+  reservations = [];
+  reservationRows.innerHTML = "";
+  adminSection.classList.add("hidden");
+  loginSection.classList.remove("hidden");
+  logoutButton.classList.add("hidden");
+  adminEmail.textContent = "";
+  document.getElementById("password").value = "";
+  clearMessage(loginMessage);
+});
+
+refreshButton.addEventListener("click", loadReservations);
+searchInput.addEventListener("input", renderReservations);
+
+(async function init(){
+  const { data } = await supabaseClient.auth.getSession();
+  if(data.session){
+    await showAdmin(data.session);
+  }
+})();
+</script>
+</body>
+</html>
 
