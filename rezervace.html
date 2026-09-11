@@ -1053,6 +1053,17 @@ reservationForm.addEventListener("submit", async event => {
   await loadOccupiedSeats();
 
   reservationForm.reset();
+  // Po úspěšné rezervaci schováme formulář a horní souhrn
+reservationForm.querySelector(".form-grid").style.display = "none";
+reservationForm.querySelector('button[type="submit"]').style.display = "none";
+reservationForm.querySelector(".form-hint").style.display = "none";
+formSummary.style.display = "none";
+
+// Posuneme obsah okna nahoru, aby byl na mobilu hned vidět QR kód
+const formModalBox = formModal.querySelector(".modal-box");
+if(formModalBox){
+  formModalBox.scrollTop = 0;
+}
 
   submitButton.disabled = false;
   submitButton.textContent = originalButtonText;
