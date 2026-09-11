@@ -1019,6 +1019,32 @@ reservationForm.addEventListener("submit", async event => {
   const reservedCount = selectedSeats.length;
   const totalPrice = reservedCount * PRICE_PER_SEAT;
 
+  // ODESLÁNÍ POTVRZOVACÍHO E-MAILU
+  // Chyba e-mailu nezruší již vytvořenou rezervaci.
+  try{
+    const { error: emailError } = await supabaseClient.functions.invoke(
+      "send-reservation-email",
+      {
+        body: {
+          email: reservationData.email,
+          first_name: reservationData.firstName,
+          last_name: reservationData.lastName,
+          reservation_id: reservationNumber,
+          seats: reservationData.seats,
+          total_price: totalPrice
+        }
+      }
+    );
+
+    if(emailError){
+      console.error("Potvrzovací e-mail se nepodařilo odeslat:", emailError);
+    }else{
+      console.log("Potvrzovací e-mail byl odeslán.");
+    }
+  }catch(emailException){
+    console.error("Chyba při odesílání potvrzovacího e-mailu:", emailException);
+  }
+
   localStorage.removeItem("plesSelectedSeats");
 
   selectedSeats = [];
