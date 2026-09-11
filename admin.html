@@ -146,6 +146,7 @@ tr:last-child td{border-bottom:0}
 .status.reserved{background:#fff3cd;color:#7a5a00}
 .status.paid{background:#dff4df;color:#236b2b}
 .status.other{background:#ececec;color:#555}
+.status.expired{background:#f1e3e1;color:#8a3d35}
 .pay-btn{
   border:0;
   border-radius:9px;
@@ -305,6 +306,9 @@ function statusLabel(status){
   if(status === "cancelled"){
     return '<span class="status other">STORNOVÁNO</span>';
   }
+  if(status === "expired"){
+    return '<span class="status expired">VYPRŠELO</span>';
+  }
   return `<span class="status other">${String(status || "—").toUpperCase()}</span>`;
 }
 
@@ -337,9 +341,11 @@ function renderReservations(){
 
   const paidCount = reservations.filter(r => r.status === "paid").length;
   const reservedCount = reservations.filter(r => r.status === "reserved").length;
+  const expiredCount = reservations.filter(r => r.status === "expired").length;
+  const cancelledCount = reservations.filter(r => r.status === "cancelled").length;
 
   reservationSummary.textContent =
-    `Celkem ${reservations.length} rezervací • čeká ${reservedCount} • zaplaceno ${paidCount}`;
+    `Celkem ${reservations.length} rezervací • čeká ${reservedCount} • zaplaceno ${paidCount} • vypršelo ${expiredCount} • stornováno ${cancelledCount}`;
 
   if(filtered.length === 0){
     reservationRows.innerHTML =
@@ -360,6 +366,8 @@ function renderReservations(){
         `<br><button class="cancel-btn" data-cancel-id="${r.id}">STORNOVAT REZERVACI</button>`;
     }else if(r.status === "cancelled"){
       action = '<button class="cancel-btn" disabled>STORNOVÁNO</button>';
+    }else if(r.status === "expired"){
+      action = '<button class="cancel-btn" disabled>VYPRŠELO</button>';
     }else{
       action =
         `<button class="pay-btn" data-id="${r.id}">POTVRDIT PLATBU</button>` +
@@ -539,4 +547,3 @@ searchInput.addEventListener("input", renderReservations);
 </script>
 </body>
 </html>
-
