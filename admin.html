@@ -171,11 +171,32 @@ tr:last-child td{border-bottom:0}
 .muted{color:#7f756b;font-size:13px}
 .hidden{display:none!important}
 @media(max-width:700px){
-  .header-inner{align-items:flex-start;flex-direction:column}
-  .header h1{font-size:21px}
-  .page{padding:18px 10px 35px}
-  .card{padding:16px;border-radius:14px}
-  .toolbar input{min-width:100%;width:100%}
+  .header{padding:14px 12px}
+  .header-inner{align-items:stretch;flex-direction:column;gap:10px}
+  .header h1{font-size:20px;line-height:1.25}
+  .header-actions{justify-content:space-between;flex-wrap:wrap}
+  .page{padding:14px 8px 30px}
+  .card{padding:12px;border-radius:14px}
+  .toolbar{display:block;margin-bottom:14px}
+  .toolbar-left{display:grid;grid-template-columns:1fr auto;gap:8px;width:100%}
+  .toolbar input{min-width:0;width:100%}
+  .refresh{white-space:nowrap}
+  .summary{margin-top:14px;padding:12px;background:#f7f2eb;border-radius:12px;line-height:1.55;font-size:14px}
+  .table-wrap{overflow:visible;border:0}
+  table{min-width:0;background:transparent}
+  thead{display:none}
+  tbody,tr,td{display:block;width:100%}
+  tr{margin-bottom:12px;padding:14px;background:#fff;border:1px solid #e3d9cc;border-radius:14px;box-shadow:0 4px 14px rgba(0,0,0,.05)}
+  td{display:grid;grid-template-columns:105px minmax(0,1fr);gap:10px;padding:8px 0;border-bottom:1px solid #eee6dd;align-items:start;overflow-wrap:anywhere}
+  td::before{content:attr(data-label);font-size:11px;font-weight:800;color:#7f756b;text-transform:uppercase;letter-spacing:.35px}
+  td:first-child{padding-top:0}
+  td:last-child{border-bottom:0;padding-bottom:0}
+  td[data-label="Jméno"]{font-size:18px}
+  td[data-label="Cena"] strong{font-size:20px}
+  td[data-label="Akce"]{display:block;padding-top:12px}
+  td[data-label="Akce"]::before{display:none}
+  td[data-label="Akce"] .pay-btn,td[data-label="Akce"] .cancel-btn{width:100%;min-height:46px;margin:0 0 8px}
+  td[data-label="Akce"] br{display:none}
 }
 </style>
 </head>
@@ -389,16 +410,16 @@ function renderReservations(){
 
     return `
       <tr>
-        <td>${r.id}</td>
-        <td><strong>${escapeHtml(r.first_name)} ${escapeHtml(r.last_name)}</strong></td>
-        <td>${contact}</td>
-        <td>${escapeHtml(r.seats || "—")}</td>
-        <td>${r.seat_count ?? 0}</td>
-        <td><strong>${formatMoney(r.total_price)}</strong></td>
-        <td>${formatDate(r.created_at)}</td>
-        <td>${formatDate(r.expires_at)}</td>
-        <td>${statusLabel(r.status)}</td>
-        <td>${action}</td>
+        <td data-label="ID">${r.id}</td>
+        <td data-label="Jméno"><strong>${escapeHtml(r.first_name)} ${escapeHtml(r.last_name)}</strong></td>
+        <td data-label="Kontakt">${contact}</td>
+        <td data-label="Místa">${escapeHtml(r.seats || "—")}</td>
+        <td data-label="Počet">${r.seat_count ?? 0}</td>
+        <td data-label="Cena"><strong>${formatMoney(r.total_price)}</strong></td>
+        <td data-label="Vytvořeno">${formatDate(r.created_at)}</td>
+        <td data-label="Platnost do">${formatDate(r.expires_at)}</td>
+        <td data-label="Stav">${statusLabel(r.status)}</td>
+        <td data-label="Akce">${action}</td>
       </tr>
     `;
   }).join("");
