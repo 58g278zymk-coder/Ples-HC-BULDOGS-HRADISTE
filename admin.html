@@ -394,19 +394,21 @@ function renderReservations(){
 
     let action = "";
 
-    if(r.status === "paid"){
-      action =
-        '<button class="pay-btn" disabled>ZAPLACENO</button>' +
-        `<br><button class="cancel-btn" data-cancel-id="${r.id}">STORNOVAT REZERVACI</button>`;
+   if(r.status === "paid"){
+  action =
+    '<button class="pay-btn" disabled>ZAPLACENO</button>' +
+    `<br><button class="change-seats-btn" data-change-id="${r.id}">ZMĚNIT MÍSTA</button>` +
+    `<br><button class="cancel-btn" data-cancel-id="${r.id}">STORNOVAT REZERVACI</button>`;
     }else if(r.status === "cancelled"){
       action = '<button class="cancel-btn" disabled>STORNOVÁNO</button>';
     }else if(r.status === "expired"){
       action = '<button class="cancel-btn" disabled>VYPRŠELO</button>';
-    }else{
-      action =
-        `<button class="pay-btn" data-id="${r.id}">POTVRDIT PLATBU</button>` +
-        `<br><button class="cancel-btn" data-cancel-id="${r.id}">STORNOVAT REZERVACI</button>`;
-    }
+   }else{
+  action =
+    `<button class="pay-btn" data-id="${r.id}">POTVRDIT PLATBU</button>` +
+    `<br><button class="change-seats-btn" data-change-id="${r.id}">ZMĚNIT MÍSTA</button>` +
+    `<br><button class="cancel-btn" data-cancel-id="${r.id}">STORNOVAT REZERVACI</button>`;
+}
 
     return `
       <tr>
