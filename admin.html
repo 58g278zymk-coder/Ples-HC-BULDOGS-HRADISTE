@@ -485,6 +485,17 @@ const reservationSummary = document.getElementById("reservationSummary");
 const searchInput = document.getElementById("searchInput");
 
 let reservations = [];
+  let changingReservation = null;
+let selectedChangedSeats = [];
+let occupiedSeatsForChange = [];
+
+const changeSeatsModal = document.getElementById("changeSeatsModal");
+const closeChangeSeats = document.getElementById("closeChangeSeats");
+const changeSeatsReservation = document.getElementById("changeSeatsReservation");
+const changeSeatsPlan = document.getElementById("changeSeatsPlan");
+const changeSeatsCount = document.getElementById("changeSeatsCount");
+const saveChangedSeats = document.getElementById("saveChangedSeats");
+const changeSeatsMessage = document.getElementById("changeSeatsMessage");
 
 function showMessage(el, text, type="error"){
   el.textContent = text;
