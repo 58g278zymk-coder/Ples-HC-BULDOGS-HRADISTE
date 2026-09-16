@@ -506,6 +506,88 @@ function clearMessage(el){
   el.textContent = "";
   el.className = "message";
 }
+  function seatKey(table, seat){
+  return `${table}-${seat}`;
+}
+
+function updateChangedSeatsCount(){
+  changeSeatsCount.textContent =
+    `Vybráno: ${selectedChangedSeats.length} míst`;
+}
+
+function renderChangeSeatsPlan(){
+
+  changeSeatsPlan.innerHTML = "";
+
+  for(let table = 1; table <= 16; table++){
+
+    const tableBox = document.createElement("div");
+    tableBox.className = "change-table";
+
+    const title = document.createElement("div");
+    title.className = "change-table-title";
+    title.textContent = `STŮL ${table}`;
+
+    const seatsBox = document.createElement("div");
+    seatsBox.className = "change-table-seats";
+
+    for(let seat = 1; seat <= 8; seat++){
+
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "change-seat";
+      button.textContent = seat;
+
+      const key = seatKey(table, seat);
+
+      const isOccupied =
+        occupiedSeatsForChange.some(
+          s => seatKey(s.table_number, s.seat_number) === key
+        );
+
+      const isSelected =
+        selectedChangedSeats.some(
+          s => seatKey(s.table, s.seat) === key
+        );
+
+      if(isOccupied && !isSelected){
+        button.classList.add("occupied");
+        button.disabled = true;
+      }
+
+      if(isSelected){
+        button.classList.add("selected");
+      }
+
+      button.addEventListener("click", () => {
+
+        const index = selectedChangedSeats.findIndex(
+          s => seatKey(s.table, s.seat) === key
+        );
+
+        if(index >= 0){
+          selectedChangedSeats.splice(index, 1);
+        }else{
+          selectedChangedSeats.push({
+            table,
+            seat
+          });
+        }
+
+        renderChangeSeatsPlan();
+        updateChangedSeatsCount();
+      });
+
+      seatsBox.appendChild(button);
+    }
+
+    tableBox.appendChild(title);
+    tableBox.appendChild(seatsBox);
+    changeSeatsPlan.appendChild(tableBox);
+  }
+
+  updateChangedSeatsCount();
+}
 
 function formatDate(value){
   if(!value) return "—";
