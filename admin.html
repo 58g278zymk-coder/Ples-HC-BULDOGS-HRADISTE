@@ -183,6 +183,136 @@ tr:last-child td{border-bottom:0}
 }
 .cancel-btn:disabled{background:#b9b9b9;cursor:not-allowed}
 .muted{color:#7f756b;font-size:13px}
+  /* =========================================
+   ZMĚNA MÍST – MODÁLNÍ OKNO
+========================================= */
+
+.change-modal{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  background:rgba(0,0,0,.65);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+}
+
+.change-modal-box{
+  position:relative;
+  width:min(700px,100%);
+  max-height:90vh;
+  overflow-y:auto;
+  background:#fff;
+  border-radius:18px;
+  padding:26px;
+  box-shadow:0 20px 60px rgba(0,0,0,.30);
+}
+
+.change-modal-box h2{
+  margin:0 45px 8px 0;
+  color:#182433;
+}
+
+.change-modal-close{
+  position:absolute;
+  top:12px;
+  right:14px;
+  width:38px;
+  height:38px;
+  border:0;
+  border-radius:50%;
+  background:#eee6dd;
+  color:#182433;
+  font-size:26px;
+  line-height:1;
+  cursor:pointer;
+}
+
+.change-seats-plan{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+  margin:22px 0;
+}
+
+.change-table{
+  border:1px solid #ddd2c5;
+  border-radius:12px;
+  padding:10px;
+  background:#f8f4ef;
+  text-align:center;
+}
+
+.change-table-title{
+  font-weight:800;
+  margin-bottom:8px;
+}
+
+.change-table-seats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:6px;
+}
+
+.change-seat{
+  min-height:38px;
+  border:1px solid #c9bbaa;
+  border-radius:8px;
+  background:#fff;
+  cursor:pointer;
+  font-weight:800;
+}
+
+.change-seat.selected{
+  background:#d5a536;
+  color:#211708;
+  border-color:#b27d27;
+}
+
+.change-seat.occupied{
+  background:#b3362d;
+  color:#fff;
+  border-color:#962b24;
+  cursor:not-allowed;
+}
+
+.change-seats-legend{
+  display:flex;
+  gap:18px;
+  flex-wrap:wrap;
+  margin:0 0 20px;
+  font-size:14px;
+  font-weight:700;
+}
+
+@media(max-width:700px){
+  .change-modal{
+    padding:8px;
+  }
+
+  .change-modal-box{
+    padding:20px 12px;
+    max-height:96vh;
+  }
+
+  .change-seats-plan{
+    grid-template-columns:repeat(2,1fr);
+    gap:8px;
+  }
+
+  .change-table{
+    padding:8px;
+  }
+
+  .change-table-seats{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .change-seat{
+    min-height:44px;
+  }
+}
 .hidden{display:none!important}
 @media(max-width:700px){
   .header{padding:14px 12px}
