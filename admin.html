@@ -157,6 +157,20 @@ tr:last-child td{border-bottom:0}
   cursor:pointer;
 }
 .pay-btn:disabled{background:#b9b9b9;cursor:not-allowed}
+  .change-seats-btn{
+  border:0;
+  border-radius:9px;
+  padding:9px 11px;
+  background:#b27d27;
+  color:#fff;
+  font-weight:800;
+  cursor:pointer;
+  margin-top:7px;
+}
+
+.change-seats-btn:hover{
+  background:#94651f;
+}
 .cancel-btn{
   border:0;
   border-radius:9px;
@@ -195,7 +209,13 @@ tr:last-child td{border-bottom:0}
   td[data-label="Cena"] strong{font-size:20px}
   td[data-label="Akce"]{display:block;padding-top:12px}
   td[data-label="Akce"]::before{display:none}
-  td[data-label="Akce"] .pay-btn,td[data-label="Akce"] .cancel-btn{width:100%;min-height:46px;margin:0 0 8px}
+ td[data-label="Akce"] .pay-btn,
+td[data-label="Akce"] .change-seats-btn,
+td[data-label="Akce"] .cancel-btn{
+  width:100%;
+  min-height:46px;
+  margin:0 0 8px;
+}
   td[data-label="Akce"] br{display:none}
 }
 </style>
