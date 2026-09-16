@@ -1045,7 +1045,7 @@ logoutButton.addEventListener("click", async () => {
 
 // Pokud je rezervace už zaplacená,
 // pošleme zákazníkovi e-mail s novými místy
-if(changingReservation.status === "paid"){
+if(String(changingReservation.status).trim().toLowerCase() === "paid"){
 
   const { error: emailError } =
     await supabaseClient.functions.invoke(
