@@ -286,6 +286,51 @@ td[data-label="Akce"] .cancel-btn{
     </div>
   </section>
 
+  <!-- OKNO PRO ZMĚNU MÍST -->
+<div id="changeSeatsModal" class="change-modal hidden">
+
+  <div class="change-modal-box">
+
+    <button
+      id="closeChangeSeats"
+      class="change-modal-close"
+      type="button"
+      aria-label="Zavřít"
+    >
+      ×
+    </button>
+
+    <h2>ZMĚNIT MÍSTA</h2>
+
+    <p id="changeSeatsReservation" class="muted"></p>
+
+    <p>
+      Vyberte nová místa rezervace.
+      <br>
+      <strong id="changeSeatsCount">Vybráno: 0 míst</strong>
+    </p>
+
+    <div id="changeSeatsPlan" class="change-seats-plan"></div>
+
+    <div class="change-seats-legend">
+      <span>⬜ Volné</span>
+      <span>🟨 Vybrané</span>
+      <span>🟥 Obsazené</span>
+    </div>
+
+    <button
+      id="saveChangedSeats"
+      class="primary"
+      type="button"
+    >
+      ULOŽIT ZMĚNU MÍST
+    </button>
+
+    <div id="changeSeatsMessage" class="message"></div>
+
+  </div>
+
+</div>
 </main>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
