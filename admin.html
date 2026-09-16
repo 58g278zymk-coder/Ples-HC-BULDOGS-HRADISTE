@@ -721,6 +721,12 @@ function renderReservations(){
   document.querySelectorAll(".cancel-btn[data-cancel-id]").forEach(button => {
     button.addEventListener("click", () => cancelReservation(Number(button.dataset.cancelId), button));
   });
+  document.querySelectorAll(".change-seats-btn[data-change-id]").forEach(button => {
+  button.addEventListener("click", () => {
+    openChangeSeats(Number(button.dataset.changeId));
+  });
+});
+  
 }
 
 async function loadReservations(){
