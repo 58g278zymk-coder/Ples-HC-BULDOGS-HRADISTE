@@ -976,6 +976,13 @@ logoutButton.addEventListener("click", async () => {
   clearMessage(loginMessage);
 });
 
+  closeChangeSeats.addEventListener("click", () => {
+  changeSeatsModal.classList.add("hidden");
+  changingReservation = null;
+  selectedChangedSeats = [];
+  occupiedSeatsForChange = [];
+  clearMessage(changeSeatsMessage);
+});
 refreshButton.addEventListener("click", loadReservations);
 searchInput.addEventListener("input", renderReservations);
 
