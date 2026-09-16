@@ -1043,35 +1043,27 @@ logoutButton.addEventListener("click", async () => {
     "ok"
   );
 
-// Pokud je rezervace už zaplacená,
-// pošleme zákazníkovi e-mail s novými místy
-if(String(changingReservation.status).trim().toLowerCase() === "paid"){
-
-  const { error: emailError } =
-    await supabaseClient.functions.invoke(
-      "send-seat-change-email",
-      {
-        body: {
-          email: changingReservation.email,
-          first_name: changingReservation.first_name,
-          last_name: changingReservation.last_name,
-          reservation_id: changingReservation.id,
-          seats: seatsText
-        }
+// Po změně míst zavoláme e-mailovou funkci.
+// Funkce sama ověří, zda je rezervace zaplacená.
+const { data: seatEmailData, error: emailError } =
+  await supabaseClient.functions.invoke(
+    "send-seat-change-email",
+    {
+      body: {
+        email: changingReservation.email,
+        first_name: changingReservation.first_name,
+        last_name: changingReservation.last_name,
+        reservation_id: changingReservation.id,
+        seats: seatsText
       }
-    );
+    }
+  );
 
-  if(emailError){
-    console.error(
-      "E-mail o změně míst se nepodařilo odeslat:",
-      emailError
-    );
-
-    showMessage(
-      adminMessage,
-      `Místa rezervace ${name} byla změněna, ale e-mail zákazníkovi se nepodařilo odeslat.`
-    );
-  }
+if(emailError){
+  console.error(
+    "Kontrola e-mailu po změně míst selhala:",
+    emailError
+  );
 }
     
   changeSeatsModal.classList.add("hidden");
