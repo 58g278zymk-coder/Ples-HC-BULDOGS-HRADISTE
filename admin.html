@@ -976,6 +976,81 @@ logoutButton.addEventListener("click", async () => {
   clearMessage(loginMessage);
 });
 
+  saveChangedSeats.addEventListener("click", async () => {
+
+  clearMessage(changeSeatsMessage);
+
+  if(!changingReservation){
+    showMessage(
+      changeSeatsMessage,
+      "Rezervace nebyla nalezena."
+    );
+    return;
+  }
+
+  if(selectedChangedSeats.length === 0){
+    showMessage(
+      changeSeatsMessage,
+      "Vyberte alespoň jedno místo."
+    );
+    return;
+  }
+
+  const name =
+    `${changingReservation.first_name} ${changingReservation.last_name}`;
+
+  const seatsText = selectedChangedSeats
+    .sort((a,b) => a.table - b.table || a.seat - b.seat)
+    .map(s => `Stůl ${s.table} / místo ${s.seat}`)
+    .join(", ");
+
+  if(!confirm(
+    `Opravdu změnit místa rezervace ${name}?\n\nNová místa:\n${seatsText}`
+  )){
+    return;
+  }
+
+  saveChangedSeats.disabled = true;
+  saveChangedSeats.textContent = "UKLÁDÁM…";
+
+  const { error } = await supabaseClient.rpc(
+    "change_reservation_seats",
+    {
+      p_reservation_id: changingReservation.id,
+      p_seats: selectedChangedSeats
+    }
+  );
+
+  saveChangedSeats.disabled = false;
+  saveChangedSeats.textContent = "ULOŽIT ZMĚNU MÍST";
+
+  if(error){
+    console.error(error);
+
+    showMessage(
+      changeSeatsMessage,
+      error.message?.includes("obsazeno")
+        ? "Jedno z vybraných míst už mezitím někdo obsadil. Původní místa rezervace zůstala zachována."
+        : "Změnu míst se nepodařilo uložit."
+    );
+
+    return;
+  }
+
+  showMessage(
+    adminMessage,
+    `Místa rezervace ${name} byla úspěšně změněna.`,
+    "ok"
+  );
+
+  changeSeatsModal.classList.add("hidden");
+
+  changingReservation = null;
+  selectedChangedSeats = [];
+  occupiedSeatsForChange = [];
+
+  await loadReservations();
+});
   closeChangeSeats.addEventListener("click", () => {
   changeSeatsModal.classList.add("hidden");
   changingReservation = null;
