@@ -741,7 +741,41 @@
 
 </script>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+<script>
+const SUPABASE_URL = "https://krlmpfuifkjqemhhtidp.supabase.co";
+const SUPABASE_KEY = "sb_publishable_3RBrTlTzK9OGSsDpSnxZUQ_PP3mTI3I";
+
+const supabaseClient = supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+
+async function loadFreeSeats() {
+
+    const { data, error } = await supabaseClient
+        .rpc("get_occupied_seats");
+
+    if (error) {
+        console.error("Nepodařilo se načíst počet volných míst:", error);
+        return;
+    }
+
+    const TOTAL_SEATS = 128;
+    const occupiedSeats = data ? data.length : 0;
+    const freeSeats = Math.max(0, TOTAL_SEATS - occupiedSeats);
+
+    const freeSeatsElement =
+        document.getElementById("free-seats");
+
+    if (freeSeatsElement) {
+        freeSeatsElement.textContent = freeSeats;
+    }
+}
+
+loadFreeSeats();
+</script>
 </body>
 
 </html>
