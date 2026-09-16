@@ -729,6 +729,65 @@ function renderReservations(){
   
 }
 
+  async function openChangeSeats(id){
+
+  clearMessage(changeSeatsMessage);
+
+  const reservation = reservations.find(
+    r => Number(r.id) === Number(id)
+  );
+
+  if(!reservation){
+    showMessage(
+      adminMessage,
+      "Rezervace nebyla nalezena."
+    );
+    return;
+  }
+
+  changingReservation = reservation;
+
+  // Načteme všechna aktuálně obsazená místa
+  const { data, error } = await supabaseClient
+    .rpc("get_occupied_seats");
+
+  if(error){
+    console.error(error);
+    showMessage(
+      adminMessage,
+      "Nepodařilo se načíst obsazená místa."
+    );
+    return;
+  }
+
+  occupiedSeatsForChange = data || [];
+
+  // Z textu rezervace zjistíme její současná místa
+  selectedChangedSeats = String(reservation.seats || "")
+    .split(",")
+    .map(item => item.trim())
+    .map(item => {
+
+      const match = item.match(
+        /Stůl\s+(\d+)\s*\/\s*místo\s+(\d+)/i
+      );
+
+      return match
+        ? {
+            table: Number(match[1]),
+            seat: Number(match[2])
+          }
+        : null;
+    })
+    .filter(Boolean);
+
+  changeSeatsReservation.textContent =
+    `Rezervace č. ${reservation.id} – ${reservation.first_name} ${reservation.last_name}`;
+
+  renderChangeSeatsPlan();
+
+  changeSeatsModal.classList.remove("hidden");
+}
 async function loadReservations(){
   clearMessage(adminMessage);
   refreshButton.disabled = true;
