@@ -961,7 +961,23 @@ loginForm.addEventListener("submit", async event => {
     return;
   }
 
-  await showAdmin(data.session);
+  const ADMIN_EMAIL = "barboratillova27@gmail.com";
+
+if (
+    !data.session?.user?.email ||
+    data.session.user.email.toLowerCase() !== ADMIN_EMAIL.toLowerCase()
+) {
+    await supabaseClient.auth.signOut();
+
+    showMessage(
+        loginMessage,
+        "Tento účet nemá oprávnění pro přístup do administrace."
+    );
+
+    return;
+}
+
+await showAdmin(data.session);
 });
 
 logoutButton.addEventListener("click", async () => {
