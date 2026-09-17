@@ -1100,11 +1100,21 @@ if(emailError){
 refreshButton.addEventListener("click", loadReservations);
 searchInput.addEventListener("input", renderReservations);
 
-(async function init(){
-  const { data } = await supabaseClient.auth.getSession();
-  if(data.session){
-    await showAdmin(data.session);
-  }
+(async function init() {
+    const { data } = await supabaseClient.auth.getSession();
+
+    if (data.session) {
+
+        const ADMIN_EMAIL = "barboratillova27@gmail.com";
+        const userEmail = data.session?.user?.email?.toLowerCase();
+
+        if (userEmail !== ADMIN_EMAIL.toLowerCase()) {
+            await supabaseClient.auth.signOut();
+            return;
+        }
+
+        await showAdmin(data.session);
+    }
 })();
 </script>
 </body>
