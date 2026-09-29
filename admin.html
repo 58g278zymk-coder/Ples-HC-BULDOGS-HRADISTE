@@ -430,15 +430,17 @@ td[data-label="Akce"] .cancel-btn{
       ×
     </button>
 
-    <h2>ZMĚNIT MÍSTA</h2>
+    <h2>UPRAVIT MÍSTA</h2>
 
     <p id="changeSeatsReservation" class="muted"></p>
 
-    <p>
-      Vyberte nová místa rezervace.
-      <br>
-      <strong id="changeSeatsCount">Vybráno: 0 míst</strong>
-    </p>
+   <p>
+  <strong>Žlutě označená místa zůstanou v rezervaci.</strong>
+  <br>
+  Kliknutím na místo jej můžete odebrat nebo přidat.
+  <br><br>
+  <strong id="changeSeatsCount">V rezervaci zůstane: 0 míst</strong>
+</p>
 
     <div id="changeSeatsPlan" class="change-seats-plan"></div>
 
@@ -512,7 +514,7 @@ function clearMessage(el){
 
 function updateChangedSeatsCount(){
   changeSeatsCount.textContent =
-    `Vybráno: ${selectedChangedSeats.length} míst`;
+    `V rezervaci zůstane: ${selectedChangedSeats.length} míst`;
 }
 
 function renderChangeSeatsPlan(){
@@ -685,7 +687,7 @@ function renderReservations(){
    if(r.status === "paid"){
   action =
     '<button class="pay-btn" disabled>ZAPLACENO</button>' +
-    `<br><button class="change-seats-btn" data-change-id="${r.id}">ZMĚNIT MÍSTA</button>` +
+    `<br><button class="change-seats-btn" data-change-id="${r.id}">UPRAVIT MÍSTA</button>` +
     `<br><button class="cancel-btn" data-cancel-id="${r.id}">STORNOVAT REZERVACI</button>`;
     }else if(r.status === "cancelled"){
       action = '<button class="cancel-btn" disabled>STORNOVÁNO</button>';
@@ -694,7 +696,7 @@ function renderReservations(){
    }else{
   action =
     `<button class="pay-btn" data-id="${r.id}">POTVRDIT PLATBU</button>` +
-    `<br><button class="change-seats-btn" data-change-id="${r.id}">ZMĚNIT MÍSTA</button>` +
+    `<br><button class="change-seats-btn" data-change-id="${r.id}">UPRAVIT MÍSTA</button>` +
     `<br><button class="cancel-btn" data-cancel-id="${r.id}">STORNOVAT REZERVACI</button>`;
 }
 
