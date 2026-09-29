@@ -951,6 +951,8 @@ formModal.addEventListener("click", event => {
 reservationForm.addEventListener("submit", async event => {
   event.preventDefault();
 
+  const originallySelectedCount = selectedSeats.length;
+  
   if(selectedSeats.length === 0){
     successMessage.style.display = "block";
     successMessage.style.background = "#fdecea";
@@ -981,6 +983,18 @@ reservationForm.addEventListener("submit", async event => {
     return;
   }
 
+  if(selectedSeats.length !== originallySelectedCount){
+  submitButton.disabled = false;
+  submitButton.textContent = originalButtonText;
+
+  successMessage.style.display = "block";
+  successMessage.className = "success-message error";
+  successMessage.textContent =
+    "Některá z vámi vybraných míst mezitím rezervoval jiný návštěvník. Váš původní výběr se změnil. Zavřete prosím okno, zkontrolujte aktuálně dostupná místa a rezervaci odešlete znovu.";
+
+  return;
+}
+  
   if(selectedSeats.length === 0){
     submitButton.disabled = false;
     submitButton.textContent = originalButtonText;
