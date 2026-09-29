@@ -920,6 +920,25 @@ function closeFormModal(){
   formModal.classList.remove("open");
   formModal.setAttribute("aria-hidden","true");
   document.body.style.overflow = "";
+
+  // Připravíme okno pro případnou další rezervaci
+  reservationForm.querySelector(".form-grid").style.display = "";
+  reservationForm.querySelector('button[type="submit"]').style.display = "";
+  reservationForm.querySelector(".form-hint").style.display = "";
+  formSummary.style.display = "";
+
+  const subtitle = formModal.querySelector(".modal-subtitle");
+  if(subtitle){
+    subtitle.style.display = "";
+  }
+
+  successMessage.style.display = "none";
+  successMessage.textContent = "";
+
+  paymentBox.style.display = "none";
+  paymentQr.innerHTML = "";
+
+  reservationForm.reset();
 }
 
 continueButton.addEventListener("click", openFormModal);
