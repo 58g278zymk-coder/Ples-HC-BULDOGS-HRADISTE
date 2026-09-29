@@ -815,7 +815,7 @@ async function markPaid(id, button){
   const name = reservation ? `${reservation.first_name} ${reservation.last_name}` : `ID ${id}`;
 
   if(!confirm(
-  `Potvrdit platbu ${formatMoney(reservation?.total_price)} za ${reservation?.seat_count || 0} míst?\n\n` +
+ `Potvrdit platbu ${formatMoney(reservation?.total_price)} za ${reservation?.seat_count || 0} ${reservation?.seat_count === 1 ? "místo" : (reservation?.seat_count >= 2 && reservation?.seat_count <= 4 ? "místa" : "míst")}?\n\n` +
   `Rezervace: ${name}\n\n` +
   `Po potvrzení bude rezervace označena jako ZAPLACENO a zákazníkovi bude odeslán potvrzovací e-mail.`
 )){
