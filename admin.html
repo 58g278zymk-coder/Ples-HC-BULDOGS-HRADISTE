@@ -814,8 +814,12 @@ async function markPaid(id, button){
   const reservation = reservations.find(r => Number(r.id) === Number(id));
   const name = reservation ? `${reservation.first_name} ${reservation.last_name}` : `ID ${id}`;
 
-  if(!confirm(`Potvrdit přijatou platbu pro rezervaci ${name}?`)){
-    return;
+  if(!confirm(
+  `Potvrdit platbu ${formatMoney(reservation?.total_price)} za ${reservation?.seat_count || 0} míst?\n\n` +
+  `Rezervace: ${name}\n\n` +
+  `Po potvrzení bude rezervace označena jako ZAPLACENO a zákazníkovi bude odeslán potvrzovací e-mail.`
+)){
+  return;
   }
 
   const originalText = button.textContent;
